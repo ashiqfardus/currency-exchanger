@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('login')
+@section('content')
     <main class="main" id="top">
         <div class="container-fluid px-0" data-layout="container">
             <div class="container">
@@ -52,7 +52,9 @@
                                 @endif
                             </div>
                             <button class="btn btn-primary w-100 mb-3" type="submit">Sign In</button>
-                            <div class="text-center"><a class="fs--1 fw-bold" href="sign-up.html">Create an account</a></div>
+                            @if (Route::has('register'))
+                                <div class="text-center"><a class="fs--1 fw-bold" href="{{route('register')}}">Create an account</a></div>
+                            @endif
                         </form>
                     </div>
                 </div>

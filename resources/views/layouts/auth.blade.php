@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr">
 
 
 <!-- Mirrored from prium.github.io/phoenix/v1.7.0/pages/authentication/simple/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Jan 2023 16:30:19 GMT -->
@@ -8,11 +8,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Phoenix</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -61,7 +62,7 @@
 <!-- ===============================================-->
 <!--    Main Content-->
 <!-- ===============================================-->
-@yield('login')
+@yield('content')
 <!-- ===============================================-->
 <!--    End of Main Content-->
 <!-- ===============================================-->
@@ -71,7 +72,7 @@
 {{-------------- Start customizer --------------}}
 {{----------------------------------------------}}
 
-@yield('customizer')
+@include('includes.customizer')
 
 {{----------------------------------------------}}
 {{---------------- End customizer --------------}}

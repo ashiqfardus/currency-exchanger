@@ -17,9 +17,9 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified')->middleware('auth');
 Route::get('/admin/home', [HomeController::class,'adminIndex'])->name('admin.index')->middleware('admin');
