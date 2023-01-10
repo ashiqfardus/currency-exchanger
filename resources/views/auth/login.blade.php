@@ -19,7 +19,7 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             @if ($errors->any())
-                                <div class="alert alert-phoenix-danger alert-danger">
+                                <div class="alert alert-phoenix-danger alert-soft-danger">
                                     <ul class="list-group">
                                         @foreach ($errors->all() as $error)
                                             <li class="list-group-item list-group-item-danger">{{ $error }}</li>
