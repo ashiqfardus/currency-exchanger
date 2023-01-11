@@ -21,5 +21,16 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified')->middleware('auth');
-Route::get('/admin/home', [HomeController::class,'adminIndex'])->name('admin.index')->middleware('admin');
+
+//User middleware & routes
+Route::middleware('auth', 'verified')->group(function(){
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+//Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified','auth');
+//Route::get('/admin/home', [HomeController::class,'adminIndex'])->name('admin.index')->middleware('admin');
+
+// Admin middleware & routes
+Route::middleware('admin')->group(function (){
+    Route::get('/admin/home', [HomeController::class,'adminIndex'])->name('admin.index');
+});
