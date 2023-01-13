@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicons/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicons/favicon-16x16.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicons/favicon.ico')}}">
-    <link rel="manifest" href="{{asset('assets/img/favicons/manifest.json')}}">
+{{--    <link rel="manifest" href="{{asset('assets/img/favicons/manifest.json')}}">--}}
     <meta name="msapplication-TileImage" content="{{asset('assets/img/favicons/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{asset('assets/vendors/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
@@ -133,7 +133,4 @@
 {{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARdVcREeBK44lIWnv5-iPijKqvlSAVwbw&amp;callback=revenueMapInit" async></script>--}}
 <script src="{{asset('assets/js/ecommerce-dashboard.js')}}"></script>
 </body>
-
-
-<!-- Mirrored from prium.github.io/phoenix/v1.7.0/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Jan 2023 16:28:48 GMT -->
 </html>
