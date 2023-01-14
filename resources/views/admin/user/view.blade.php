@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="col-auto d-flex">
-                            <button class="btn btn-primary float-end btn-sm mb-0"><span class="fas fa-plus me-2"></span>Add</button>
+                            <a href="#" class="btn btn-primary float-end btn-sm mb-0"><span class="fas fa-plus me-2"></span>Add</a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                         </td>
                                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold" href="mailto:{{$row->email}}">{{$row->email}}</a></td>
                                         <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-1000">
-                                            <a href="@if($row->email_verified_at==null) {{route('users.verify',['id'=>\Illuminate\Support\Facades\Auth::id()])}} @else # @endif">
+                                            <a href="@if($row->email_verified_at==null) {{route('users.verify',['id'=>$row->id])}} @else # @endif">
                                                 <span class="badge badge-phoenix fs--2 badge-phoenix-{{$row->email_verified_at==null ? 'danger':'success'}}">
                                                     <span class="badge-label">{{$row->email_verified_at==null ? 'Not verified':'Verified'}}</span>
                                                     <span class="ms-1" data-feather="{{$row->email_verified_at==null ? 'x':'check'}}" style="height:12.8px;width:12.8px;"></span>

@@ -46,6 +46,9 @@ class UserController extends Controller
     }
 
     public function verify($id){
-        return $id;
+        $user = User::find($id);
+        $user->email_verified_at=now();
+        $user->save();
+        return redirect()->back()->with('success','User has been approved');
     }
 }

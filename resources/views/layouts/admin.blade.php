@@ -24,6 +24,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicons/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicons/favicon-16x16.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicons/favicon.ico')}}">
+
 {{--    <link rel="manifest" href="{{asset('assets/img/favicons/manifest.json')}}">--}}
     <meta name="msapplication-TileImage" content="{{asset('assets/img/favicons/mstile-150x150.png')}}">
     <meta name="theme-color" content="#ffffff">
@@ -130,7 +131,7 @@
 <script src="{{asset('assets/vendors/echarts/echarts.min.js')}}"></script>
 <script src="{{asset('assets/vendors/chart/chart.min.js')}}"></script>
 <script src="{{asset('assets/vendors/%40googlemaps/markerclusterer%402.0.14/dist/index.min.js')}}"></script>
-{{--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARdVcREeBK44lIWnv5-iPijKqvlSAVwbw&amp;callback=revenueMapInit" async></script>--}}
 <script src="{{asset('assets/js/ecommerce-dashboard.js')}}"></script>
+
 </body>
 </html>

@@ -20,17 +20,31 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 
 //User middleware & routes
-Route::middleware('auth', 'verified')->group(function(){
+Route::middleware(['auth', 'user-access:user','user-verify','user-active'])->group(function(){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+Route::middleware(['auth', 'user-access:user'])->group(function(){
+    Route::get('/verification', [HomeController::class, 'verification'])->name('verification');
+    Route::get('/not_active', [HomeController::class, 'is_active'])->name('not_active');
 });
 
 
+Route::middleware(['auth'])->group(function(){
+    Route::get('/error403', [HomeController::class, 'error403'])->name('error403');
+});
+
+
+
 // Admin middleware & routes
-Route::middleware('admin')->group(function (){
+
+Route::get('admin',function (){
+    return redirect('/admin/home');
+});
+Route::middleware(['auth','user-access:admin'])->group(function (){
     Route::get('admin/home', [HomeController::class,'adminIndex'])->name('admin.index');
     Route::resource('admin/users',UserController::class);
     Route::get('admin/users/verify/{id}',[UserController::class, 'verify'])->name('users.verify');

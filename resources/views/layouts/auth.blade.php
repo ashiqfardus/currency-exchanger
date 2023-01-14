@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href={{asset('assets/img/favicons/favicon-32x32.png')}}>
     <link rel="icon" type="image/png" sizes="16x16" href={{asset('assets/img/favicons/favicon-16x16.png')}}>
     <link rel="shortcut icon" type="image/x-icon" href={{asset('assets/img/favicons/favicon.ico')}}>
-    <link rel="manifest" href={{asset('assets/img/favicons/manifest.json')}}>
+   <link rel="manifest" href={{asset('assets/img/favicons/manifest.json')}}>
     <meta name="msapplication-TileImage" content={{asset('assets/img/favicons/mstile-150x150.png')}}>
     <meta name="theme-color" content="#ffffff">
     <script src={{asset('assets/vendors/imagesloaded/imagesloaded.pkgd.min.js')}}></script>
@@ -41,6 +41,7 @@
     <link href={{asset('assets/css/theme.min.css')}} type="text/css" rel="stylesheet" id="style-default">
     <link href={{asset('assets/css/user-rtl.min.css')}} type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href={{asset('assets/css/user.min.css')}} type="text/css" rel="stylesheet" id="user-style-default">
+
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {
