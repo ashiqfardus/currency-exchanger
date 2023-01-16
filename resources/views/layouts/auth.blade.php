@@ -25,6 +25,7 @@
    <link rel="manifest" href={{asset('assets/img/favicons/manifest.json')}}>
     <meta name="msapplication-TileImage" content={{asset('assets/img/favicons/mstile-150x150.png')}}>
     <meta name="theme-color" content="#ffffff">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <script src={{asset('assets/vendors/imagesloaded/imagesloaded.pkgd.min.js')}}></script>
     <script src={{asset('assets/vendors/simplebar/simplebar.min.js')}}></script>
     <script src={{asset('assets/js/config.js')}}></script>
@@ -32,6 +33,7 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -41,7 +43,7 @@
     <link href={{asset('assets/css/theme.min.css')}} type="text/css" rel="stylesheet" id="style-default">
     <link href={{asset('assets/css/user-rtl.min.css')}} type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href={{asset('assets/css/user.min.css')}} type="text/css" rel="stylesheet" id="user-style-default">
-
+    <link href="{{asset('assets/css/parsley.css')}}" type="text/css" rel="stylesheet">
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {
@@ -92,8 +94,21 @@
 <script src={{asset('assets/js/polyfill.min58be.js?features=window.scroll')}}></script>
 <script src={{asset('assets/vendors/list.js/list.min.js')}}></script>
 <script src={{asset('assets/vendors/feather-icons/feather.min.js')}}></script>
+<script src="{{asset('assets/js/dropify.min.js')}}"></script>
 <script src={{asset('assets/vendors/dayjs/dayjs.min.js')}}></script>
 <script src={{asset('assets/js/phoenix.js')}}></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    $('form').parsley();
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+</script>
 </body>
 
 

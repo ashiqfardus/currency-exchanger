@@ -16,11 +16,11 @@
                             <hr class="bg-200" />
                             <div class="divider-content-center">Use Email</div>
                         </div>
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3 text-start">
                                 <label class="form-label" for="name">Name</label>
-                                <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" placeholder="Name"  name="name" value="{{ old('name') }}" required autocomplete="name" autofocus />
+                                <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" placeholder="Name"  name="name" value="{{ old('name') }}" data-parsley-required="true" autocomplete="name" autofocus />
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -29,8 +29,17 @@
                             </div>
                             <div class="mb-3 text-start">
                                 <label class="form-label" for="email">Email address</label>
-                                <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" placeholder="name@example.com" name="email" value="{{ old('email') }}" required autocomplete="email"/>
+                                <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" placeholder="name@example.com" name="email" value="{{ old('email') }}" data-parsley-required="true" autocomplete="email"/>
                                 @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3 text-start">
+                                <label class="form-label" for="phone">Phone</label>
+                                <input class="form-control @error('phone') is-invalid @enderror" id="phone" data-parsley-type="number" data-parsley-length="[11, 11]" placeholder="01XXX XXXXXX" name="phone" value="{{ old('phone') }}" data-parsley-required="true" autocomplete="phone"/>
+                                @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -39,7 +48,7 @@
                             <div class="row g-3 mb-3">
                                 <div class="col-md-12">
                                     <label class="form-label" for="password">Password</label>
-                                    <input class="form-control form-icon-input @error('password') is-invalid @enderror" id="password" type="password" placeholder="Password" name="password" required autocomplete="new-password"/>
+                                    <input class="form-control form-icon-input @error('password') is-invalid @enderror" data-parsley-minlength="8" id="password" type="password" placeholder="Password" name="password" data-parsley-required="true" autocomplete="new-password"/>
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -48,7 +57,11 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label" for="password-confirm">Confirm Password</label>
-                                    <input class="form-control form-icon-input" id="password-confirm" type="password" placeholder="Confirm Password" name="password_confirmation" required autocomplete="new-password" />
+                                    <input class="form-control form-icon-input" id="password-confirm" type="password" data-parsley-minlength="8" placeholder="Confirm Password" name="password_confirmation" data-parsley-required="true" autocomplete="new-password" />
+                                </div>
+                                <div class="col-md-12 code-to-copy">
+                                    <label class="form-label" for="image">NID/Passport/Driving License/Birth Certificate</label>
+                                    <input type="file" name="image" id="input-file-now" class="dropify" data-height="100" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg gif" data-parsley-required="true"/>
                                 </div>
                             </div>
                             <div class="form-check mb-3">

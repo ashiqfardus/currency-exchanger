@@ -44,6 +44,24 @@
     <link href="{{asset('assets/css/theme.min.css')}}" type="text/css" rel="stylesheet" id="style-default">
     <link href="{{asset('assets/css/user-rtl.min.css')}}" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="{{asset('assets/css/user.min.css')}}" type="text/css" rel="stylesheet" id="user-style-default">
+    <link rel="stylesheet" href="{{asset('assets/css/toastr.css')}}">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="{{asset('assets/js/toastr.js')}}"></script>
+    <script>
+        $(function() {
+            $.toastr.config({
+                time: 3000
+            });
+            setTimeout(function () {
+                @if(Session::has('success'))
+                $.toastr.success('{{Session::get('success')}}', {position: 'top-right'});
+                @endif
+                @if(Session::has('error'))
+                $.toastr.error('{{Session::get('error')}}', {position: 'top-right'});
+                @endif
+            }, 1000);
+        })
+    </script>
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {
@@ -132,6 +150,5 @@
 <script src="{{asset('assets/vendors/chart/chart.min.js')}}"></script>
 <script src="{{asset('assets/vendors/%40googlemaps/markerclusterer%402.0.14/dist/index.min.js')}}"></script>
 <script src="{{asset('assets/js/ecommerce-dashboard.js')}}"></script>
-
 </body>
 </html>

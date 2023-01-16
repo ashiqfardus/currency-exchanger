@@ -11,7 +11,7 @@
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">All <span class="text-700 fw-semi-bold">({{$count}})</span></a></li>
             </ul>
-            <div id="products" data-list='{"valueNames":["name","email","email_verified_at","is_admin"],"page":10,"pagination":true}'>
+            <div id="products" data-list='{"valueNames":["name","email","email_verified_at","is_admin","is_active"],"page":10,"pagination":true}'>
                 <div class="mb-4">
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
@@ -36,6 +36,7 @@
                                 <th class="sort align-middle pe-5" scope="col" data-sort="email">Email</th>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="email_verified_at">Verification Status</th>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="is_admin">Role</th>
+                                <th class="sort align-middle pe-5" scope="col" data-sort="is_active">Action</th>
                             </tr>
                             </thead>
                             <tbody class="list" id="customers-table-body">
@@ -59,6 +60,14 @@
                                             </a>
                                         </td>
                                         <td class="total-spent align-middle white-space-nowrap fw-bold ps-3 text-1100">{{$row->is_admin==1 ? "Admin" : "User"}}</td>
+                                        <td class="total-spent align-middle white-space-nowrap fw-bold ps-3 text-1100">
+                                            <a href="{{route('users.activate',['id'=>$row->id])}}">
+                                                <span class="badge badge-phoenix fs--2 badge-phoenix-{{$row->is_active==0 ? 'danger':'success'}}">
+                                                    <span class="badge-label">{{$row->is_active==0 ? 'Inactive':'Active'}}</span>
+                                                    <span class="ms-1" data-feather="{{$row->is_active==0 ? 'x':'check'}}" style="height:12.8px;width:12.8px;"></span>
+                                                </span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
