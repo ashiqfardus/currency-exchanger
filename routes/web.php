@@ -48,4 +48,5 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     Route::get('admin/home', [HomeController::class,'adminIndex'])->name('admin.index');
     Route::resource('admin/users',UserController::class);
     Route::get('admin/users/verify/{id}',[UserController::class, 'verify'])->name('users.verify');
+    Route::get('admin/users/activate/{id}',[UserController::class, 'activate'])->name('users.activate');
 });
