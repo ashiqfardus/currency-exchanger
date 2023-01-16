@@ -51,4 +51,16 @@ class UserController extends Controller
         $user->save();
         return redirect()->back()->with('success','User has been approved');
     }
+
+    public function activate($id){
+        $user = User::find($id);
+        if ($user->is_active==1){
+            $user->is_active =0;
+        }
+        else{
+            $user->is_active =1;
+        }
+        $user->save();
+        return redirect()->back()->with('success','User active status has been updated');
+    }
 }
