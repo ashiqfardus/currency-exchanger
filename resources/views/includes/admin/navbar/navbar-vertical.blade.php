@@ -28,7 +28,8 @@
                         <div class="parent-wrapper label-1">
                             <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="project-management">
                                 <li class="collapsed-nav-item-title d-none">Currency</li>
-                                <li class="nav-item"><a class="nav-link" href="" asd="index" data-bs-toggle="" aria-expanded="false">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('currency.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text">Add new</span></div>
                                     </a><!-- more inner pages-->
                                 </li>

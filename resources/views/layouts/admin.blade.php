@@ -47,6 +47,11 @@
     <link rel="stylesheet" href="{{asset('assets/css/toastr.css')}}">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <script src="{{asset('assets/js/toastr.js')}}"></script>
+    <link href="{{asset('assets/css/parsley.css')}}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script>
         $(function() {
             $.toastr.config({
@@ -150,5 +155,25 @@
 <script src="{{asset('assets/vendors/chart/chart.min.js')}}"></script>
 <script src="{{asset('assets/vendors/%40googlemaps/markerclusterer%402.0.14/dist/index.min.js')}}"></script>
 <script src="{{asset('assets/js/ecommerce-dashboard.js')}}"></script>
+<script src="{{asset('assets/js/dropify.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.select2').select2({
+            theme: 'bootstrap-5'
+        });
+    });
+    $('form').parsley();
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove':  'Remove',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+</script>
 </body>
 </html>
