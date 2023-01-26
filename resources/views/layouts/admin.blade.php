@@ -55,7 +55,7 @@
     <script>
         $(function() {
             $.toastr.config({
-                time: 3000
+                time: 1000
             });
             setTimeout(function () {
                 @if(Session::has('success'))
@@ -164,7 +164,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.select2').select2({
-            theme: 'bootstrap-5'
+            theme: 'bootstrap-5',
+            width:'100%'
         });
     });
     $('form').parsley();

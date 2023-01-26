@@ -56,4 +56,5 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
 
     //Currency routes
     Route::resource('/admin/currency', CurrencyController::class);
+    Route::get('admin/currency/activate/{id}',[CurrencyController::class, 'activate'])->name('currency.activate');
 });

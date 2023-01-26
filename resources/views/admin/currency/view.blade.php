@@ -5,13 +5,13 @@
         <div class="mb-9">
             <div class="row g-2 mb-4">
                 <div class="col-auto">
-                    <h3 class="mb-0">Users</h3>
+                    <h3 class="mb-0">Currency Details</h3>
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">All <span class="text-700 fw-semi-bold">({{$count}})</span></a></li>
             </ul>
-            <div id="products" data-list='{"valueNames":["name","email","email_verified_at","is_admin","is_active"],"page":10,"pagination":true}'>
+            <div id="products" data-list='{"valueNames":["name","currency_type","reserve","image","is_active"],"page":10,"pagination":true}'>
                 <div class="mb-4">
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="col-auto d-flex">
-                            <a href="#" class="btn btn-primary float-end btn-sm mb-0"><span class="fas fa-plus me-2"></span>Add</a>
+                            <a href="{{route('currency.create')}}" class="btn btn-primary float-end btn-sm mb-0"><span class="fas fa-plus me-2"></span>Add</a>
                         </div>
                     </div>
                 </div>
@@ -31,13 +31,14 @@
                     <div class="table-responsive scrollbar-overlay mx-n1 px-1">
                         <table class="table fs--1 mb-0">
                             <thead>
+
                             <tr>
-                                <th class="sort align-middle pe-5" scope="col" data-sort="name">Name</th>
-                                <th class="sort align-middle pe-5" scope="col" data-sort="email">Email</th>
-                                <th class="sort align-middle pe-5" scope="col" data-sort="image">Image</th>
-                                <th class="sort align-middle pe-5" scope="col" data-sort="email_verified_at">Verification Status</th>
-                                <th class="sort align-middle pe-5" scope="col" data-sort="is_admin">Role</th>
-                                <th class="sort align-middle text-center pe-5" scope="col" data-sort="is_active">Action</th>
+                                <th class="sort align-middle" scope="col" data-sort="name">Name</th>
+                                <th class="sort align-middle" scope="col" data-sort="currency_type">Type</th>
+                                <th class="sort align-middle" scope="col" data-sort="reserve">Reserve</th>
+                                <th class="sort align-middle" scope="col" data-sort="image">Image</th>
+                                <th class="sort align-middle" scope="col" data-sort="is_active">Active Status</th>
+                                <th class="sort align-middle text-center" scope="col" data-sort="action">Action</th>
                             </tr>
                             </thead>
                             <tbody class="list" id="customers-table-body">
@@ -46,31 +47,34 @@
                                         <td colspan="6" class="text-center">No data found</td>
                                     </tr>
                                 @endif
-                                @foreach($users as $row)
+                                @foreach($data as $row)
                                     <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                         <td class="name align-middle white-space-nowrap pe-5">
                                             <p class="mb-0 text-1100 fw-bold">{{$row->name}}</p>
                                         </td>
-                                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold" href="mailto:{{$row->email}}">{{$row->email}}</a></td>
-                                        <td>
-                                            <a href="" id="imageView" data-bs-toggle="modal" data-bs-target="#imageModal" data-id="{{$row->id}}">
-                                                <img width="120px;" class="rounded img-thumbnail" src="{{asset('assets/images/user/'.$row->image)}}" alt="{{$row->image}}">
-                                            </a></td>
-                                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-1000">
-                                            <a href="@if($row->email_verified_at==null) {{route('users.verify',['id'=>$row->id])}} @else # @endif">
-                                                <span class="badge badge-phoenix fs--2 badge-phoenix-{{$row->email_verified_at==null ? 'danger':'success'}}">
-                                                    <span class="badge-label">{{$row->email_verified_at==null ? 'Not verified':'Verified'}}</span>
-                                                    <span class="ms-1" data-feather="{{$row->email_verified_at==null ? 'x':'check'}}" style="height:12.8px;width:12.8px;"></span>
-                                                </span>
-                                            </a>
+                                        <td class="currency_type align-middle white-space-nowrap pe-5">{{$row->currency_type_name}}</td>
+                                        <td class="reserve align-middle white-space-nowrap pe-5">{{$row->reserve}}</td>
+
+                                        <td class="image align-middle white-space-nowrap fw-semi-bold text-1000">
+                                            <img src="{{asset('assets/images/user/'.$row->image)}}" alt="{{$row->image}}" width="80px">
                                         </td>
-                                        <td class="total-spent align-middle white-space-nowrap fw-bold ps-3 text-1100">{{$row->is_admin==1 ? "Admin" : "User"}}</td>
-                                        <td class="total-spent align-middle text-center white-space-nowrap fw-bold ps-3 text-1100">
-                                            <a href="{{route('users.activate',['id'=>$row->id])}}">
+                                        <td class="is_active align-middle white-space-nowrap fw-bold ps-3 text-1100">
+                                            <a href="{{route('currency.activate',['id'=>$row->id])}}">
                                                 <span class="badge badge-phoenix fs--2 badge-phoenix-{{$row->is_active==0 ? 'danger':'success'}}">
                                                     <span class="badge-label">{{$row->is_active==0 ? 'Inactive':'Active'}}</span>
                                                     <span class="ms-1" data-feather="{{$row->is_active==0 ? 'x':'check'}}" style="height:12.8px;width:12.8px;"></span>
                                                 </span>
+                                            </a>
+                                        </td>
+                                        <td class="action align-middle text-center white-space-nowrap fw-bold ps-3 text-1100">
+                                            <a class="btn btn-phoenix-primary btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Edit" data-id='{{$row->id}}' id="btn_view">
+                                                <i class="fas fa-pencil font-15"></i>
+                                            </a>
+                                            <a class="btn btn-phoenix-success btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Update reserve" data-id='{{$row->id}}' id="btn_view">
+                                                <i class="fas fa-dollar font-15"></i>
+                                            </a>
+                                            <a class="btn btn-phoenix-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete" data-id='{{$row->id}}' id="btn_delete">
+                                                <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -95,24 +99,6 @@
                 </div>
             </div>
         </div>
-
-
-        {{--   Image modal starts here     --}}
-        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <input type="hidden" id="userId">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="imageBody">
-                        <img src="" alt="" id="userImage">
-                    </div>
-                </div>
-            </div>
-        </div>
         @include('includes.admin.footer')
     </div>
-    <script src="{{asset('assets/js/page/user.js')}}"></script>
 @endsection

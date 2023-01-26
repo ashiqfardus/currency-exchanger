@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+    <style>
+        .select2-selection { overflow: hidden; }
+        .select2-selection__rendered { white-space: normal; word-break: break-all; }
+    </style>
     <div class="content">
         <div class="mb-9">
             <div class="row g-2 mb-4">
@@ -36,7 +40,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label for="currency_type" class="form-label">Currency Type</label>
-                                    <select name="currency_type" id="currency_type" class="form-select select2" data-parsley-required>
+                                    <select name="currency_type" id="currency_type" class="form-select form-control" data-parsley-required>
                                         <option value="">Select currency type</option>
                                         @foreach($currency_types as $currency)
                                             <option value="{{$currency->id}}">{{$currency->name}}</option>
@@ -45,7 +49,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label class="form-label" for="image">Image</label>
-                                    <input type="file" name="image" id="input-file-now" class="dropify" data-height="150" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg gif" data-parsley-required="true"/>
+                                    <input type="file" name="image" id="input-file-now" class="dropify form-control" data-height="150" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg gif" data-parsley-required="true"/>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12 mt-5">
                                     <label for="is_active_input"></label>
@@ -64,4 +68,7 @@
         @include('includes.admin.footer')
     </div>
     <script src="{{asset('assets/js/page/currency.js')}}"></script>
+    <script>
+
+    </script>
 @endsection
