@@ -89,6 +89,8 @@
 <!--    Main Content-->
 <!-- ===============================================-->
 <main class="main" id="top">
+    <input type="hidden" id="baseUrl" value="{{url()->current()}}">
+    <input type="hidden" id="pathUrl" value="{{url('/')}}">
     <div class="container-fluid px-0" data-layout="container">
         @include('includes.admin.navbar.navbar-vertical')
         @include('includes.admin.navbar.navbar-top-expand')

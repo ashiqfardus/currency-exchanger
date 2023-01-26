@@ -50,6 +50,7 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
 
     //user manage routes
     Route::resource('admin/users',UserController::class);
+    Route::get('admin/users/image/{id}',[UserController::class, 'getImage']);
     Route::get('admin/users/verify/{id}',[UserController::class, 'verify'])->name('users.verify');
     Route::get('admin/users/activate/{id}',[UserController::class, 'activate'])->name('users.activate');
 

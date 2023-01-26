@@ -63,4 +63,10 @@ class UserController extends Controller
         $user->save();
         return redirect()->back()->with('success','User active status has been updated');
     }
+
+    public function getImage($id){
+        $user = User::find($id);
+
+        return response()->json($user->image);
+    }
 }

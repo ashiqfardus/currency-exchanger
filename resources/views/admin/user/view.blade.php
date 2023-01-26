@@ -34,6 +34,7 @@
                             <tr>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="name">Name</th>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="email">Email</th>
+                                <th class="sort align-middle pe-5" scope="col" data-sort="image">Image</th>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="email_verified_at">Verification Status</th>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="is_admin">Role</th>
                                 <th class="sort align-middle pe-5" scope="col" data-sort="is_active">Action</th>
@@ -51,6 +52,10 @@
                                             <p class="mb-0 text-1100 fw-bold">{{$row->name}}</p>
                                         </td>
                                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold" href="mailto:{{$row->email}}">{{$row->email}}</a></td>
+                                        <td>
+                                            <a href="" id="imageView" data-bs-toggle="modal" data-bs-target="#imageModal" data-id="{{$row->id}}">
+                                                <img width="120px;" class="rounded img-thumbnail" src="{{asset('assets/images/user/'.$row->image)}}" alt="{{$row->image}}">
+                                            </a></td>
                                         <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-1000">
                                             <a href="@if($row->email_verified_at==null) {{route('users.verify',['id'=>$row->id])}} @else # @endif">
                                                 <span class="badge badge-phoenix fs--2 badge-phoenix-{{$row->email_verified_at==null ? 'danger':'success'}}">
@@ -90,6 +95,24 @@
                 </div>
             </div>
         </div>
+
+
+        {{--   Image modal starts here     --}}
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <input type="hidden" id="userId">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="imageBody">
+                        <img src="" alt="" id="userImage">
+                    </div>
+                </div>
+            </div>
+        </div>
         @include('includes.admin.footer')
     </div>
+    <script src="{{asset('assets/js/page/user.js')}}"></script>
 @endsection
