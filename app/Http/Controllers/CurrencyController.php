@@ -11,12 +11,13 @@ class CurrencyController extends Controller
 
     public function index()
     {
+        $currency_types = DB::table('currency_types')->where('is_active','=',1)->get();
         $data = DB::table('currency_details')
             ->select('currency_details.*','currency_types.name as currency_type_name')
             ->leftJoin('currency_types','currency_details.currency_type','=','currency_types.id')
             ->get();
         $count = collect($data)->count();
-        return view('admin.currency.view')->with(['count'=>$count, 'data'=>$data]);
+        return view('admin.currency.view')->with(['count'=>$count, 'data'=>$data,'currency_types'=>$currency_types]);
     }
 
     public function create()
@@ -27,6 +28,12 @@ class CurrencyController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'image'=>'required|mimes:jpeg,png,jpg,gif',
+            'reserve'=>'required|numeric'
+        ]);
+
         if (request()->hasFile('image')){
             $image = request()->file('image')->getClientOriginalName();
             request()->file('image')->move('assets/images/currency',$image);
@@ -87,5 +94,18 @@ class CurrencyController extends Controller
             return redirect()->back()->with('error','Something went wrong.');
         }
 
+    }
+
+    public function getReserve($id){
+        $data = DB::table('currency_details')->where('id',$id)->get();
+        return response()->json($data[0]);
+    }
+
+    public function updateReserve(Request $request){
+        $request->validate([
+            'reserve'=>'required|numeric'
+        ]);
+        $newData = ['reserve'=>$request['reserve']];
+        return $data = DB::table('currency_details')->where('id',$request['dataId'])->update($newData);
     }
 }

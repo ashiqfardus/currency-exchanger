@@ -57,4 +57,6 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     //Currency routes
     Route::resource('/admin/currency', CurrencyController::class);
     Route::get('admin/currency/activate/{id}',[CurrencyController::class, 'activate'])->name('currency.activate');
+    Route::get('admin/currency/getReserve/{id}',[CurrencyController::class, 'getReserve'])->name('currency.getReserve');
+    Route::POST('admin/currency/updateReserve',[CurrencyController::class, 'updateReserve'])->name('currency.updateReserve');
 });

@@ -55,7 +55,8 @@
                                         <td>
                                             <a href="" id="imageView" data-bs-toggle="modal" data-bs-target="#imageModal" data-id="{{$row->id}}">
                                                 <img width="120px;" class="rounded img-thumbnail" src="{{asset('assets/images/user/'.$row->image)}}" alt="{{$row->image}}">
-                                            </a></td>
+                                            </a>
+                                        </td>
                                         <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-1000">
                                             <a href="@if($row->email_verified_at==null) {{route('users.verify',['id'=>$row->id])}} @else # @endif">
                                                 <span class="badge badge-phoenix fs--2 badge-phoenix-{{$row->email_verified_at==null ? 'danger':'success'}}">
@@ -103,7 +104,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">NID/Passport/Driving License/Birth Certificate</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="imageBody">

@@ -67,10 +67,10 @@
                                             </a>
                                         </td>
                                         <td class="action align-middle text-center white-space-nowrap fw-bold ps-3 text-1100">
-                                            <a class="btn btn-phoenix-primary btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Edit" data-id='{{$row->id}}' id="btn_view">
+                                            <a class="btn btn-phoenix-primary btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Edit" data-id='{{$row->id}}' id="btn_edit">
                                                 <i class="fas fa-pencil font-15"></i>
                                             </a>
-                                            <a class="btn btn-phoenix-success btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Update reserve" data-id='{{$row->id}}' id="btn_view">
+                                            <a class="btn btn-phoenix-success btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Update reserve" data-id='{{$row->id}}' id="btn_reserve">
                                                 <i class="fas fa-dollar font-15"></i>
                                             </a>
                                             <a class="btn btn-phoenix-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete" data-id='{{$row->id}}' id="btn_delete">
@@ -101,4 +101,38 @@
         </div>
         @include('includes.admin.footer')
     </div>
+
+    {{--  Edit modal  --}}
+    <div class="modal fade" id="edit_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update currency reserve</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('currency.updateReserve') }}" enctype="multipart/form-data" id="update_reserve">
+                        @csrf
+                        <input type="hidden" id="dataId" name="dataId">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <label for="reserve" class="form-label">Reserve</label>
+                                <input type="number" min="0" value="0" class="form-control @error('reserve') is-invalid @enderror" id="reserve" placeholder="Reserve amount" name="reserve" data-parsley-required="true" data-parsley-min="0" step="0.1" data-parsley-type="number">
+                                @error('reserve')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-sm mb-3 mt-3 text-end float-end" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{{asset('assets/js/page/currency.js')}}"></script>
 @endsection
