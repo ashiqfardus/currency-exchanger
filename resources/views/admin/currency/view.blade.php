@@ -56,7 +56,7 @@
                                         <td class="reserve align-middle white-space-nowrap pe-5">{{$row->reserve}}</td>
 
                                         <td class="image align-middle white-space-nowrap fw-semi-bold text-1000">
-                                            <img src="{{asset('assets/images/user/'.$row->image)}}" alt="{{$row->image}}" width="80px">
+                                            <img src="{{asset('assets/images/currency/'.$row->image)}}" alt="{{$row->image}}" width="40px">
                                         </td>
                                         <td class="is_active align-middle white-space-nowrap fw-bold ps-3 text-1100">
                                             <a href="{{route('currency.activate',['id'=>$row->id])}}">
@@ -67,7 +67,7 @@
                                             </a>
                                         </td>
                                         <td class="action align-middle text-center white-space-nowrap fw-bold ps-3 text-1100">
-                                            <a class="btn btn-phoenix-primary btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Edit" data-id='{{$row->id}}' id="btn_edit">
+                                            <a class="btn btn-phoenix-primary btn-sm" title="Edit" href="{{route('currency.edit',$row->id)}}"  id="btn_edit">
                                                 <i class="fas fa-pencil font-15"></i>
                                             </a>
                                             <a class="btn btn-phoenix-success btn-sm"  data-toggle="tooltip" data-placement="bottom" title="Update reserve" data-id='{{$row->id}}' id="btn_reserve">
@@ -129,6 +129,32 @@
                         <button class="btn btn-primary btn-sm mb-3 mt-3 text-end float-end" type="submit">Submit</button>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {{--  Delete modal  --}}
+
+    <div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete currency</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('currency.deleteData') }}" enctype="multipart/form-data" id="update_reserve">
+                    <div class="modal-body">
+
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" id="delete_id" name="delete_id">
+                        <h5>Are you sure you want to delete?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

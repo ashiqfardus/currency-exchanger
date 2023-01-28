@@ -57,5 +57,15 @@ $(document).ready(function(){
                 }, 1000);
             }
         });
-    })
+    });
+
+
+    //    Delete modal open
+
+    $('#btn_delete').on('click', function (){
+        var id = $(this).attr('data-id');
+        $('#delete_id').val(id);
+        $('#delete_modal').modal('show');
+    });
+
 });

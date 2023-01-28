@@ -55,8 +55,11 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     Route::get('admin/users/activate/{id}',[UserController::class, 'activate'])->name('users.activate');
 
     //Currency routes
+    Route::get('admin/currency/updateAllReserve/',[CurrencyController::class,'updateAllReserve'])->name('currency.updateAllReserve');
     Route::resource('/admin/currency', CurrencyController::class);
     Route::get('admin/currency/activate/{id}',[CurrencyController::class, 'activate'])->name('currency.activate');
     Route::get('admin/currency/getReserve/{id}',[CurrencyController::class, 'getReserve'])->name('currency.getReserve');
     Route::POST('admin/currency/updateReserve',[CurrencyController::class, 'updateReserve'])->name('currency.updateReserve');
+    Route::DELETE('admin/currency/delete',[CurrencyController::class, 'destroy'])->name('currency.deleteData');
+    Route::POST('admin/currency/updateStore/reserve',[CurrencyController::class,'updateSaveReserve'])->name('currency.updateSave');
 });

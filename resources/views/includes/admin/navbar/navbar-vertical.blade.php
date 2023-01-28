@@ -37,6 +37,10 @@
                                         <div class="d-flex align-items-center"><span class="nav-link-text">View All</span></div>
                                     </a><!-- more inner pages-->
                                 </li>
+                                <li class="nav-item"><a class="nav-link" href="{{route('currency.updateAllReserve')}}" asd="index" data-bs-toggle="" aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text">Reserve Update</span></div>
+                                    </a><!-- more inner pages-->
+                                </li>
                             </ul>
                         </div>
                     </div><!-- parent pages-->
