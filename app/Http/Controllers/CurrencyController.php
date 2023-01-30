@@ -36,7 +36,7 @@ class CurrencyController extends Controller
         ]);
 
         if (request()->hasFile('image')){
-            $image = request()->file('image')->getClientOriginalName();
+            $image = time().request()->file('image')->getClientOriginalName();
             request()->file('image')->move('assets/images/currency',$image);
         }
         else{
@@ -86,7 +86,7 @@ class CurrencyController extends Controller
             if (file_exists($old_image)){
                 unlink($old_image);
             }
-            $image = request()->file('image')->getClientOriginalName();
+            $image = time().request()->file('image')->getClientOriginalName();
             request()->file('image')->move('assets/images/currency',$image);
         }
         else{

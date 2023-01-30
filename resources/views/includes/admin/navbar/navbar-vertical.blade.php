@@ -45,6 +45,29 @@
                         </div>
                     </div><!-- parent pages-->
                     <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" href="#send_receive" asd="index" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="project-management">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon">
+                                    <span class="fas fa-caret-right"></span>
+                                </div>
+                                <span class="nav-link-icon">
+                                    <span data-feather="dollar-sign"></span>
+                                </span>
+                                <span class="nav-link-text">Send & Receive Merge</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="send_receive">
+                                <li class="collapsed-nav-item-title d-none">Send & Receive Merge</li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('currency.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text">Add new</span></div>
+                                    </a><!-- more inner pages-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- parent pages-->
+                    <div class="nav-item-wrapper">
                         <a class="nav-link label-1" href="{{route('users.index')}}" asd="index" role="button" data-bs-toggle="" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon">
