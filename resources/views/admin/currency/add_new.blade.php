@@ -68,7 +68,4 @@
         @include('includes.admin.footer')
     </div>
     <script src="{{asset('assets/js/page/currency.js')}}"></script>
-    <script>
-
-    </script>
 @endsection

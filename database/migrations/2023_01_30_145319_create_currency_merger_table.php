@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('send_id')->default(0);
             $table->decimal('min',10,2)->default(0);
+            $table->decimal('max',10,2)->default(0);
             $table->integer('receive_id')->default(0);
             $table->decimal('sent_unit',10,2)->default(0);
             $table->decimal('receive_unit',10,2)->default(0);

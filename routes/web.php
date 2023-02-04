@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CurrencyMerger;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +63,9 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     Route::POST('admin/currency/updateReserve',[CurrencyController::class, 'updateReserve'])->name('currency.updateReserve');
     Route::DELETE('admin/currency/delete',[CurrencyController::class, 'destroy'])->name('currency.deleteData');
     Route::POST('admin/currency/updateStore/reserve',[CurrencyController::class,'updateSaveReserve'])->name('currency.updateSave');
+
+
+    //currency merge routes
+    Route::get('admin/currency/merge/create', [CurrencyMerger::class, 'create'])->name('currency_merge.create');
+    Route::get('admin/currency/merge/getReceiveUrl/{id}', [CurrencyMerger::class, 'getReceiveUrl'])->name('currency_merge.getReceiveUrl');
 });

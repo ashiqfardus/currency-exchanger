@@ -53,14 +53,14 @@
                                 <span class="nav-link-icon">
                                     <span data-feather="dollar-sign"></span>
                                 </span>
-                                <span class="nav-link-text">Send & Receive Merge</span>
+                                <span class="nav-link-text">Currency Merge</span>
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
                             <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="send_receive">
-                                <li class="collapsed-nav-item-title d-none">Send & Receive Merge</li>
+                                <li class="collapsed-nav-item-title d-none">Currency Merge</li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('currency.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
+                                    <a class="nav-link" href="{{route('currency_merge.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text">Add new</span></div>
                                     </a><!-- more inner pages-->
                                 </li>
