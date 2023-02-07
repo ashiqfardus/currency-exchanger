@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CurrencyMerger extends Controller
@@ -32,5 +33,56 @@ class CurrencyMerger extends Controller
             ';
         }
         return response()->json(['td'=>$td]);
+    }
+
+    //store form data
+
+    public function store(Request $request){
+        $request->validate([
+           'currency' => 'required|numeric',
+            'min_amount' => 'required|numeric',
+            'max_amount' => 'required|numeric',
+            'inc_prod_data_id' => 'required',
+            'receive_currency_id' => 'required',
+            'sent_amount' => 'required',
+            'receive_amount' => 'required'
+        ]);
+
+        $currency_id = $request->currency;
+        $min_amount = $request->min_amount;
+        $max_amount = $request->max_amount;
+        $count = count($request->inc_prod_data_id);
+        $receive_currency_id = $request->receive_currency_id;
+        $sent_amount = $request->sent_amount;
+        $receive_amount = $request->receive_amount;
+
+        $res = 0;
+
+        for ($i=0; $i<$count; $i++){
+            $data = [
+              'send_id' => $currency_id,
+                'min' => $min_amount,
+                'max' => $max_amount,
+                'receive_id' => $receive_currency_id[$i],
+                'sent_unit' => $sent_amount[$i],
+                'receive_unit' => $receive_amount[$i],
+                'created_by' => Auth::user()->id
+            ];
+
+            $insert = DB::table('currency_merger')->insert($data);
+            if ($insert){
+                $res +=1;
+            }
+            else{
+                $res = $res;
+            }
+
+        }
+        if ($count == $res){
+            return redirect()->back()->with('success', 'Currency merged successfully');
+        }
+        else{
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }

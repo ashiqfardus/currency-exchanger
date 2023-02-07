@@ -86,6 +86,11 @@ var currency_body = new Vue({
                     }
                 });
             }
+        },
+        getReceiveCurrencyType:function(id){
+            var dataId = id;
+            var currencyType = $('#receive_currency_id'+dataId).find(':selected').attr('data-type');
+            $('#receive_currency_type'+dataId).val(currencyType);
         }
     }
 });

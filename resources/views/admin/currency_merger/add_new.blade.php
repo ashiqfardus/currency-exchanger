@@ -106,31 +106,49 @@
             <div class="row justify-content-center">
                 <div class="card" style="width: 75rem;">
                     <div class="card-body" id="currency_body">
-                        <form method="POST" action="#" enctype="multipart/form-data">
+                        @if($errors->any())
+                            {{ implode('', $errors->all('<div>:message</div>')) }}
+                        @endif
+                        <form method="POST" action="{{route('currency_merge.store')}}" enctype="multipart/form-data">
                         @csrf
                             <div class="row">
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label for="currency" class="form-label">Currency Type</label>
-                                    <select name="currency" id="currency" class="form-select form-control" data-parsley-required @change="getReceiveCurrency">
+                                    <select name="currency" id="currency" class="form-select form-control @error('currency') is-invalid @enderror" data-parsley-required @change="getReceiveCurrency">
                                         <option value="">Select currency</option>
                                         @foreach($currency_details as $currency)
                                             <option value="{{$currency->id}}" data-type="{{$currency->currency_type_name}}">{{$currency->name}}</option>
                                         @endforeach
                                     </select>
+                                    @error('currency')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label for="currency_type" class="form-label">Currency Type</label>
-                                    <input type="text" class="form-control readOnly" name="currency_type" id="currency_type" readonly>
+                                    <input type="text" class="form-control readOnly" name="currency_type" id="currency_type" readonly data-parsley-required>
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label for="min_amount" class="form-label">Minimum sent amount</label>
-                                    <input type="number" class="form-control" name="min_amount" id="min_amount" data-parsley-min="0" step="0.01" data-parsley-type="number" value="0" min="0">
+                                    <input type="number" class="form-control @error('min_amount') is-invalid @enderror" name="min_amount" id="min_amount" data-parsley-required data-parsley-min="0" step="0.01" data-parsley-type="number" value="0" min="0">
+                                    @error('min_amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label for="max_amount" class="form-label">Maximum sent amount</label>
-                                    <input type="number" class="form-control" name="max_amount" id="max_amount" data-parsley-min="0" step="0.01" data-parsley-type="number" value="0" min="0">
+                                    <input type="number" class="form-control @error('max_amount') is-invalid @enderror" name="max_amount" id="max_amount" data-parsley-required data-parsley-min="0" step="0.01" data-parsley-type="number" value="0" min="0">
+                                    @error('max_amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -163,18 +181,33 @@
                                                         </label>
                                                     </td>
                                                     <td width="250px">
-                                                        <select name="receive_currency_id[]" :id="'receive_currency_id'+i" class="custom-field receive_currency_id" :data-id="i" required>
+                                                        <select @change="getReceiveCurrencyType(i)" name="receive_currency_id[]" :id="'receive_currency_id'+i" class="custom-field receive_currency_id @error('receive_currency_id.*') is-invalid @enderror" :data-id="i" required>
 
                                                         </select>
+                                                        @error('receive_currency_id.*')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </td>
                                                     <td width="180px">
-                                                        <input type="text" class="readOnly custom-field" name="receive_currency_type[]" :id = "'receive_currency_type'+i" :data-id="i" data-parsley-required="true">
+                                                        <input type="text" style="border: inherit;" class="readOnly custom-field text-center" name="receive_currency_type[]" :id = "'receive_currency_type'+i" :data-id="i" data-parsley-required="true">
                                                     </td>
                                                     <td width="150px">
-                                                        <input class="custom-field text-end" style="padding-right: 30px;" type="number" value="0" name="sent_amount" :id="'sent_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                                                        <input class="custom-field text-end @error('sent_amount') is-invalid @enderror" style="padding-right: 30px;" type="number" value="0" name="sent_amount[]" :id="'sent_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                                                        @error('sent_amount')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </td>
                                                     <td width="150px">
-                                                        <input class="custom-field text-end" style="padding-right: 30px;" type="number" value="0" name="receive_amount" :id="'receive_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                                                        <input class="custom-field text-end @error('receive_amount') is-invalid @enderror" style="padding-right: 30px;" type="number" value="0" name="receive_amount[]" :id="'receive_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                                                        @error('receive_amount')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </td>
 
                                                 </tr>
@@ -192,6 +225,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            <button class="btn btn-success mb-3 mt-3 text-end float-end" type="submit">Submit</button>
                         </form>
                     </div>
                 </div>

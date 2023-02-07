@@ -68,4 +68,5 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     //currency merge routes
     Route::get('admin/currency/merge/create', [CurrencyMerger::class, 'create'])->name('currency_merge.create');
     Route::get('admin/currency/merge/getReceiveUrl/{id}', [CurrencyMerger::class, 'getReceiveUrl'])->name('currency_merge.getReceiveUrl');
+    Route::post('admin/currency/merge/store', [CurrencyMerger::class, 'store'])->name('currency_merge.store');
 });
