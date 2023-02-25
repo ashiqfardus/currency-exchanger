@@ -32,6 +32,10 @@
                                     <a class="nav-link" href="{{route('currency.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text">Add new</span></div>
                                     </a><!-- more inner pages-->
+                                </li><li class="nav-item">
+                                    <a class="nav-link" href="{{route('currency.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text">Add new</span></div>
+                                    </a><!-- more inner pages-->
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="{{route('currency.index')}}" asd="index" data-bs-toggle="" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text">View All</span></div>
@@ -62,6 +66,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('currency_merge.create')}}" asd="index" data-bs-toggle="" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text">Add new</span></div>
+                                    </a><!-- more inner pages-->
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('currency_merge.index')}}" asd="index" data-bs-toggle="" aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text">View All</span></div>
                                     </a><!-- more inner pages-->
                                 </li>
                             </ul>

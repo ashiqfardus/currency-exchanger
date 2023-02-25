@@ -85,4 +85,19 @@ class CurrencyMerger extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+
+    //currency merger view all
+    public function index(){
+        $data = DB::table('currency_merger as cm')
+            ->leftJoin('currency_details as cd', 'cm.send_id','=','cd.id')
+            ->leftJoin('currency_details as cdr', 'cm.receive_id','=','cdr.id')
+            ->leftJoin('currency_types as ct', 'cd.currency_type', '=', 'ct.id')
+            ->leftJoin('currency_types as ctr', 'cdr.currency_type', '=', 'ctr.id')
+            ->select('cm.*', 'cd.name as send_currency_name','cdr.name as rcv_currency_name', 'ct.name as send_currency_type', 'ctr.name as rcv_currency_type')
+            ->get();
+        $data = collect($data)->groupBy('send_id');
+
+        $count = collect($data)->count();
+        return view('admin.currency_merger.view')->with(['count'=>$count, 'data'=>$data]);
+    }
 }
