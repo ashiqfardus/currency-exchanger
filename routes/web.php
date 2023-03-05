@@ -70,4 +70,5 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     Route::get('admin/currency/merge/getReceiveUrl/{id}', [CurrencyMerger::class, 'getReceiveUrl'])->name('currency_merge.getReceiveUrl');
     Route::post('admin/currency/merge/store', [CurrencyMerger::class, 'store'])->name('currency_merge.store');
     Route::get('admin/currency/merge/index', [CurrencyMerger::class, 'index'])->name('currency_merge.index');
+    Route::delete('admin/currency/merge/delete',[CurrencyMerger::class, 'delete'])->name('currency_merge.delete');
 });

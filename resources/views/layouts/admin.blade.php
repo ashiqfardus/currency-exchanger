@@ -56,7 +56,7 @@
     <script>
         $(function() {
             $.toastr.config({
-                time: 1000
+                time: 3000
             });
             setTimeout(function () {
                 @if(Session::has('success'))

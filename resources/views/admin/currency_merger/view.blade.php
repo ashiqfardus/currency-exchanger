@@ -146,7 +146,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Delete currency</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{ route('currency.deleteData') }}" enctype="multipart/form-data" id="update_reserve">
+                <form method="POST" action="{{ route('currency_merge.delete') }}" enctype="multipart/form-data">
                     <div class="modal-body">
 
                         @csrf
@@ -163,6 +163,5 @@
         </div>
     </div>
 
-
-    <script src="{{asset('assets/js/page/currency.js')}}"></script>
+    <script src="{{asset('assets/js/page/currency_merger_view.js')}}"></script>
 @endsection

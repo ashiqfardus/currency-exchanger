@@ -100,4 +100,20 @@ class CurrencyMerger extends Controller
         $count = collect($data)->count();
         return view('admin.currency_merger.view')->with(['count'=>$count, 'data'=>$data]);
     }
+
+    //currency merger delete
+    public function delete(Request $request){
+        $id = $request->delete_id;
+
+        $count = DB::table('currency_merger')->where('send_id', $id)->get();
+        $count = collect($count)->count();
+        $res = DB::table('currency_merger')->where('send_id', $id)->delete();
+
+        if ($count == $res){
+            return redirect()->back()->with('success', 'Deleted successfully');
+        }
+        else{
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
 }

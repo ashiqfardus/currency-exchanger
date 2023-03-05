@@ -15,7 +15,7 @@ $(document).ready(function(){
     //for view form
 
     //edit modal open
-    $('#btn_reserve').on('click', function (){
+    $('#customers-table-body').on('click','#btn_reserve', function (e){
         var id = $(this).attr('data-id');
         $('#dataId').val(id);
         $('#edit_modal').modal('show');
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
     //    Delete modal open
 
-    $('#btn_delete').on('click', function (){
+    $('#customers-table-body').on('click','#btn_delete', function(e){
         var id = $(this).attr('data-id');
         $('#delete_id').val(id);
         $('#delete_modal').modal('show');
