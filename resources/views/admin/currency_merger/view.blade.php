@@ -14,7 +14,7 @@
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">All <span class="text-700 fw-semi-bold">()</span></a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">All <span class="text-700 fw-semi-bold">({{$count}})</span></a></li>
             </ul>
             <div id="products" data-list='{"valueNames":["send_id","min","max","receive_id","send_unit", "receive_unit"],"page":10,"pagination":true}'>
                 <div class="mb-4">
@@ -66,8 +66,8 @@
                                         <td class="table_padding" >{{$row[0]->sent_unit}} {{$row[0]->send_currency_type}}</td>
                                         <td class="table_padding" >{{$row[0]->receive_unit}} {{$row[0]->rcv_currency_type}}</td>
                                         <td rowspan="{{$c}}">
-                                            <a class="btn btn-phoenix-primary btn-sm" title="Edit" href="#"  id="btn_edit">
-                                                <i class="fas fa-pencil font-15"></i>
+                                            <a class="btn btn-phoenix-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit" data-id='{{$row[0]->send_id}}' id="btn_edit">
+                                                <i class="fas fa-pencil"></i>
                                             </a>
                                             <a class="btn btn-phoenix-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete" data-id='{{$row[0]->send_id}}' id="btn_delete">
                                                 <i class="fas fa-trash"></i>
@@ -111,7 +111,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update currency reserve</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Currency Merger</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -119,14 +119,23 @@
                         @csrf
                         <input type="hidden" id="dataId" name="dataId">
                         <div class="row">
-                            <div class="col-md-12 col-lg-12 col-sm-12">
-                                <label for="reserve" class="form-label">Reserve</label>
-                                <input type="number" min="0" value="0" class="form-control @error('reserve') is-invalid @enderror" id="reserve" placeholder="Reserve amount" name="reserve" data-parsley-required="true" data-parsley-min="0" step="0.1" data-parsley-type="number">
-                                @error('reserve')
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <label for="currency" class="form-label">Currency Type</label>
+                                <select name="currency" id="currency" class="form-select form-control @error('currency') is-invalid @enderror" data-parsley-required @change="getReceiveCurrency">
+                                    <option value="">Select currency</option>
+                                    @foreach($currency_details as $currency)
+                                        <option value="{{$currency->id}}" data-type="{{$currency->currency_type_name}}">{{$currency->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('currency')
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                 @enderror
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <label for="currency_type" class="form-label">Currency Type</label>
+                                <input type="text" class="form-control readOnly" name="currency_type" id="currency_type" readonly data-parsley-required>
                             </div>
                         </div>
 

@@ -98,7 +98,13 @@ class CurrencyMerger extends Controller
         $data = collect($data)->groupBy('send_id');
 
         $count = collect($data)->count();
-        return view('admin.currency_merger.view')->with(['count'=>$count, 'data'=>$data]);
+
+        $currency_details = DB::table('currency_details')
+            ->select('currency_details.*','currency_types.name as currency_type_name')
+            ->leftJoin('currency_types','currency_details.currency_type','=','currency_types.id')
+            ->where('currency_details.is_active','=',1)
+            ->get();
+        return view('admin.currency_merger.view')->with(['count'=>$count, 'data'=>$data, 'currency_details' => $currency_details]);
     }
 
     //currency merger delete
