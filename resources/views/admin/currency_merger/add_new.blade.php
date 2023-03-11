@@ -1,100 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <style>
-        .combined_select{
-            position: relative;
-            border: 1px solid #e3ebf6;
-        }
-        /* The container */
-        .checkbox-area {
-            display: block;
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            /*font-size: 22px;*/
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        .checkbox-area-header{
-            top: 11px;
-        }
-
-        /* Hide the browser's default checkbox */
-        .checkbox-area input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        /* Create a custom checkbox */
-        .checkmark {
-            position: absolute;
-            top: -5px;
-            left: 8px;
-            height: 15px;
-            width: 15px;
-            background-color: #eee;
-        }
-        .checkmark-item{
-            top: 5px;
-        }
-
-        /* On mouse-over, add a grey background color */
-        .checkbox-area:hover input ~ .checkmark {
-            background-color: #ccc;
-        }
-
-        /* When the checkbox is checked, add a blue background */
-        .checkbox-area input:checked ~ .checkmark {
-            background-color: #38086f;
-        }
-        .checkbox-area input:checked ~ .checkmark-item {
-            background-color: #56189d !important;
-        }
-
-        /* Create the checkmark/indicator (hidden when not checked) */
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        /* Show the checkmark when checked */
-        .checkbox-area input:checked ~ .checkmark:after {
-            display: block;
-        }
-
-        /* Style the checkmark/indicator */
-        .checkbox-area .checkmark:after {
-            left: 5px;
-            top: 2px;
-            width: 4px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        .currency_table th{
-            background-color: #324b68;
-            text-align: center;
-        }
-        .custom-field{
-            border: 0px solid transparent;
-            border-radius: 0px !important;
-            width: 100%;
-        }
-        .table>:not(caption)>*>*{
-            padding:0 !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('assets/css/vue_table.css')}}">
     <div class="content">
         <div class="mb-9">
             <div class="row g-2 mb-4">
@@ -113,7 +20,7 @@
                         @csrf
                             <div class="row">
                                 <div class="col-md-6 col-lg-6 col-sm-12">
-                                    <label for="currency" class="form-label">Currency Type</label>
+                                    <label for="currency" class="form-label">Currency</label>
                                     <select name="currency" id="currency" class="form-select form-control @error('currency') is-invalid @enderror" data-parsley-required @change="getReceiveCurrency">
                                         <option value="">Select currency</option>
                                         @foreach($currency_details as $currency)
@@ -156,7 +63,7 @@
                                     <h5><b>Receive currency details</b></h5>
                                     <div class="col-md-12" id="inc_currency">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered data-field-table currency_table" id="currency_table">
+                                            <table class="table table-custom table-bordered data-field-table currency_table" id="currency_table">
                                                 <thead>
                                                 <tr>
                                                     <th>

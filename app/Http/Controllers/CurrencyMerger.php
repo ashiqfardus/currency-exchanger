@@ -99,12 +99,7 @@ class CurrencyMerger extends Controller
 
         $count = collect($data)->count();
 
-        $currency_details = DB::table('currency_details')
-            ->select('currency_details.*','currency_types.name as currency_type_name')
-            ->leftJoin('currency_types','currency_details.currency_type','=','currency_types.id')
-            ->where('currency_details.is_active','=',1)
-            ->get();
-        return view('admin.currency_merger.view')->with(['count'=>$count, 'data'=>$data, 'currency_details' => $currency_details]);
+        return view('admin.currency_merger.view')->with(['count'=>$count, 'data'=>$data]);
     }
 
     //currency merger delete
@@ -121,5 +116,43 @@ class CurrencyMerger extends Controller
         else{
             return redirect()->back()->with('error', 'Something went wrong');
         }
+    }
+
+    //get currency details for edit dropdown
+    public function getCurrencyDetails($id){
+        //get currency data for dropdown
+        $currency_details = DB::table('currency_details')
+            ->select('currency_details.*','currency_types.name as currency_type_name')
+            ->leftJoin('currency_types','currency_details.currency_type','=','currency_types.id')
+            ->where('currency_details.is_active','=',1)
+            ->get();
+
+        $option = '<option value="">Select Currency</option>';
+        $currency_type= '';
+        foreach ($currency_details as $item){
+            $option .= '
+                <option value="'.$item->id.'" '.($item->id == $id ? "selected" : "").' data-type="'.$item->currency_type_name.'">'.$item->name.'</option>
+
+            ';
+
+            if ($item->id == $id){
+                $currency_type = $item->currency_type_name;
+            }
+        }
+
+        //get currency merger data by send_currency_id
+        $send_currency = DB::table('currency_merger')->where('send_id',$id)->get();
+        $min_amnt = $send_currency[0]->min;
+        $max_amnt = $send_currency[0]->max;
+
+
+        return response()->json(
+            [
+                'currency_details' => $option,
+                'currency_type_name' => $currency_type,
+                'min'=>$min_amnt,
+                'max' => $max_amnt
+            ]
+        );
     }
 }
