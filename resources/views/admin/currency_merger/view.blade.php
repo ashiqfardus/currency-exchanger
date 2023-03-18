@@ -116,13 +116,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="edit_currency_body">
-                    <form method="POST" action="{{ route('currency.updateReserve') }}" enctype="multipart/form-data" id="currency_merger_edit">
+                    <form method="POST" action="{{ route('currency.updateMerger') }}" enctype="multipart/form-data" id="currency_merger_edit">
                         @csrf
                         <input type="hidden" id="dataId" name="dataId">
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <label for="edit_currency" class="form-label">Currency</label>
-                                <select name="edit_currency" id="edit_currency" class="form-select form-control @error('currency') is-invalid @enderror" data-parsley-required @change="getReceiveCurrency">
+                                <select name="edit_currency" id="edit_currency" class="form-select form-control readOnly @error('currency') is-invalid @enderror" data-parsley-required @change="getReceiveCurrency">
 
                                 </select>
                                 @error('currency')
@@ -186,7 +186,7 @@
                                                 </label>
                                             </td>
                                             <td width="250px">
-                                                <select @change="getReceiveCurrencyType(i)" name="receive_currency_id[]" :id="'receive_currency_id'+i" class="custom-field receive_currency_id @error('receive_currency_id.*') is-invalid @enderror" :data-id="i" required>
+                                                <select @change="getReceiveCurrencyType(i)" name="edit_receive_currency_id[]" :id="'edit_receive_currency_id'+i" class="custom-field receive_currency_id @error('receive_currency_id.*') is-invalid @enderror" :data-id="i" required>
 
                                                 </select>
                                                 @error('receive_currency_id.*')
@@ -196,10 +196,10 @@
                                                 @enderror
                                             </td>
                                             <td width="180px">
-                                                <input type="text" style="border: inherit;" class="readOnly custom-field text-center" name="receive_currency_type[]" :id = "'receive_currency_type'+i" :data-id="i" data-parsley-required="true">
+                                                <input type="text" style="border: inherit;" class="readOnly custom-field text-center" name="edit_receive_currency_type[]" :id = "'edit_receive_currency_type'+i" :data-id="i" data-parsley-required="true">
                                             </td>
                                             <td width="150px">
-                                                <input class="custom-field text-end @error('sent_amount') is-invalid @enderror" style="padding-right: 30px;" type="number" value="0" name="sent_amount[]" :id="'sent_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                                                <input class="custom-field text-end @error('sent_amount') is-invalid @enderror" style="padding-right: 30px;" type="number" value="0" name="edit_sent_amount[]" :id="'edit_sent_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
                                                 @error('sent_amount')
                                                 <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -207,7 +207,7 @@
                                                 @enderror
                                             </td>
                                             <td width="150px">
-                                                <input class="custom-field text-end @error('receive_amount') is-invalid @enderror" style="padding-right: 30px;" type="number" value="0" name="receive_amount[]" :id="'receive_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                                                <input class="custom-field text-end @error('receive_amount') is-invalid @enderror" style="padding-right: 30px;" type="number" value="0" name="edit_receive_amount[]" :id="'edit_receive_amount'+i" :data-id="i" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
                                                 @error('receive_amount')
                                                 <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>

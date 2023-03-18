@@ -72,4 +72,5 @@ Route::middleware(['auth','user-access:admin'])->group(function (){
     Route::get('admin/currency/merge/index', [CurrencyMerger::class, 'index'])->name('currency_merge.index');
     Route::delete('admin/currency/merge/delete',[CurrencyMerger::class, 'delete'])->name('currency_merge.delete');
     Route::get('admin/currency/merge/getCurrencyDetails/{id}', [CurrencyMerger::class, 'getCurrencyDetails'])->name('currency_merge.getCurrencyDetails');
+    Route::POST('admin/currency/merge/updateMerger',[CurrencyMerger::class, 'updateMerger'])->name('currency.updateMerger');
 });

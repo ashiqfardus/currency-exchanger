@@ -25,6 +25,7 @@ $(document).ready(function() {
                 $('#edit_currency_type').val(result.currency_type_name);
                 $('#edit_min_amount').val(result.min);
                 $('#edit_max_amount').val(result.max);
+                $('#included_prod_tbody').html(result.tr);
             }
         });
     });
@@ -37,6 +38,7 @@ $(document).ready(function() {
     //currency on change get currency type
     $('#edit_currency').on('change', function (){
         let currency_type = $(this).find(':selected').attr('data-type');
+        $('#edit_currency_type').val(currency_type);
     });
 });
 
@@ -89,9 +91,9 @@ var edit_currency_body = new Vue({
                     isNotExistRow = false;
                 }
             });
-            if(isNotExistRow){
-                this.rawItem++;
-            }
+            // if(isNotExistRow){
+            //     this.rawItem++;
+            // }
         },
 
         getReceiveCurrency:function (){
@@ -104,16 +106,20 @@ var edit_currency_body = new Vue({
                     type: "get",
                     dataType: "json",
                     success: function(result) {
-                        $('#receive_currency_id'+id).html(result.td);
+                        $('#edit_receive_currency_id'+id).html(result.td);
                     }
                 });
             }
         },
         getReceiveCurrencyType:function(id){
             var dataId = id;
-            var currencyType = $('#receive_currency_id'+dataId).find(':selected').attr('data-type');
-            $('#receive_currency_type'+dataId).val(currencyType);
+            var currencyType = $('#edit_receive_currency_id'+dataId).find(':selected').attr('data-type');
+            $('#edit_receive_currency_type'+dataId).val(currencyType);
         }
     }
 });
+
+function getReceiveCurrencyTypeEdit(id){
+    edit_currency_body.getReceiveCurrencyType(id);
+}
 

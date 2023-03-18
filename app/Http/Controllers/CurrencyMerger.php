@@ -146,13 +146,84 @@ class CurrencyMerger extends Controller
         $max_amnt = $send_currency[0]->max;
 
 
+        //get existing table rows
+        $mergedData = DB::table('currency_merger')
+            ->select('currency_merger.*','currency_types.name as currency_type_name')
+            ->leftJoin('currency_details','currency_merger.receive_id','=','currency_details.id')
+            ->leftJoin('currency_types','currency_details.currency_type','=','currency_types.id')
+            ->where('send_id',$id)->get();
+
+        $tr = '';
+        $dataId = 100;
+
+        foreach ($mergedData as $row){
+            $tr .= '
+                <tr id="raw-row-id'.$dataId.'" class="row-item">
+                    <input type="hidden" name="inc_prod_data_id[]" value="'.$dataId.'">
+                    <td width="10px">
+                        <label class="checkbox-area">
+                            <input type="checkbox" name="raw-check-item" class="checkbox-raw-item" id="raw-checkbox-id'.$dataId.'" data-id="'.$dataId.'">
+                            <span class="checkmark checkmark-item"></span>
+                        </label>
+                    </td>
+
+                    <td width="250px">
+                        <select onchange="getReceiveCurrencyTypeEdit('.$dataId.')" name="edit_receive_currency_id[]" id="edit_receive_currency_id'.$dataId.'" class="custom-field receive_currency_id" data-id="'.$dataId.'" required>
+                            <option value="">Select receive currency</option>
+                        ';
+
+
+                    foreach ($currency_details as $cd){
+                        if ($row->send_id !== $cd->id){
+                            $tr .= '
+                                <option value="'.$cd->id.'" data-type="'.$cd->currency_type_name.'" '.($cd->id==$row->receive_id ? "selected" : "").'>'.$cd->name.'</option>
+                            ';
+                        }
+                    }
+
+
+            $tr.='
+                        </select>
+                    </td>
+
+                    <td width="180px">
+                        <input type="text" style="border: inherit;" value="'.$row->currency_type_name.'" class="readOnly custom-field text-center" name="edit_receive_currency_type[]" id = "edit_receive_currency_type'.$dataId.'" data-id="'.$dataId.'" data-parsley-required="true">
+                    </td>
+                    <td width="150px">
+                        <input class="custom-field text-end" value="'.$row->sent_unit.'" style="padding-right: 30px;" type="number" name="edit_sent_amount[]" id="edit_sent_amount'.$dataId.'" data-id="'.$dataId.'" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                    </td>
+                    <td width="150px">
+                        <input class="custom-field text-end" value="'.$row->receive_unit.'" style="padding-right: 30px;" type="number" name="edit_receive_amount[]" id="edit_receive_amount'.$dataId.'" data-id="'.$dataId.'" data-parsley-required="true" data-parsley-min="0" step="0.01" data-parsley-type="number">
+                    </td>
+                </tr>
+            ';
+            $dataId++;
+        }
+
+
+
         return response()->json(
             [
                 'currency_details' => $option,
                 'currency_type_name' => $currency_type,
                 'min'=>$min_amnt,
-                'max' => $max_amnt
+                'max' => $max_amnt,
+                'tr' => $tr
             ]
         );
+    }
+
+
+    //store updated currency merger
+    function updateMerger(Request $request){
+        $request->validate([
+            'edit_currency' => 'required|numeric',
+            'edit_min_amount' => 'required|numeric',
+            'edit_max_amount' => 'required|numeric',
+            'inc_prod_data_id' => 'required',
+            'edit_receive_currency_id' => 'required',
+            'edit_sent_amount' => 'required',
+            'edit_receive_amount' => 'required'
+        ]);
     }
 }
