@@ -225,5 +225,44 @@ class CurrencyMerger extends Controller
             'edit_sent_amount' => 'required',
             'edit_receive_amount' => 'required'
         ]);
+
+        $sendCurrencyId = $request->edit_currency;
+        $editMin = $request->edit_min_amount;
+        $editMax = $request->edit_max_amount;
+        $editRcvId = $request->edit_receive_currency_id;
+        $editSentAmount = $request->edit_sent_amount;
+        $editRcvAmount = $request->edit_receive_amount;
+
+        $deleteExistingData = DB::table('currency_merger')->where('send_id',$sendCurrencyId)->delete();
+
+        //insert data
+        $res = 0;
+
+        for ($i=0; $i<count($editRcvId); $i++){
+            $data = [
+                'send_id' => $sendCurrencyId,
+                'min' => $editMin,
+                'max' => $editMax,
+                'receive_id' => $editRcvId[$i],
+                'sent_unit' => $editSentAmount[$i],
+                'receive_unit' => $editRcvAmount[$i],
+                'created_by' => Auth::user()->id
+            ];
+
+            $insert = DB::table('currency_merger')->insert($data);
+            if ($insert){
+                $res +=1;
+            }
+            else{
+                $res = $res;
+            }
+        }
+
+        if (count($editRcvId) == $res){
+            return redirect()->back()->with('success', 'Currency merger edited successfully');
+        }
+        else{
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }
