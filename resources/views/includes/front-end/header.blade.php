@@ -11,7 +11,7 @@
                             </li>
                             <li>
                                 <i class="ri-mail-open-line"></i>
-                                <a href="mailto:admin@gmail.com">admin@gmail.com</a>
+                                <a href="mailto:admin@gmail.com" class="contact-info">admin@gmail.com</a>
                             </li>
                             <li>
                                 <i class="ri-map-pin-fill"></i>
@@ -53,7 +53,7 @@
     <div class="header-bottom">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{route('/')}}">
                     <img class="logo-light" src="{{asset('/')}}front-end/img/logo.png" alt="{{ config('app.name', 'Laravel') }}">
                     <img class="logo-dark" src="{{asset('/')}}front-end/img/logo-white.png" alt="{{ config('app.name', 'Laravel') }}">
                 </a>
@@ -63,7 +63,7 @@
                     </div>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">Home</a>
+                            <a href="{{route('/')}}" class="nav-link active">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="about.html" class="nav-link">
@@ -124,10 +124,10 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="login.html" class="nav-link">Login</a>
+                                            <a href="{{route('login')}}" class="nav-link">Login</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="register.html" class="nav-link">Register</a>
+                                            <a href="{{route('register')}}" class="nav-link">Register</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="recover-password.html" class="nav-link">Recover Password</a>
@@ -198,10 +198,28 @@
                     <div class="other-options md-none">
                         <div class="option-item">
                             <div class="user-login">
-                                <span><i class="ri-user-add-line"></i></span>
+                                <span><i class="@auth ri-user-line @else ri-user-add-line @endauth" style="font-size: 20px;"></i></span>
                                 <ul class="list-style">
-                                    <li><a href="login.html">Sign In</a></li>
-                                    <li><a href="register.html">Sign Up</a></li>
+                                    @if (Route::has('login'))
+                                        @auth
+                                        <li><a href="{{route('home')}}">Dashboard</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                        @else
+                                            <li><a href="{{route('login')}}">Sign In</a></li>
+                                            <li><a href="{{route('register')}}">Sign Up</a></li>
+                                        @endauth
+                                    @endif
+
                                 </ul>
                             </div>
                         </div>
@@ -210,10 +228,27 @@
             </nav>
             <div class="mobile-bar-wrap">
                 <div class="user-login d-lg-none">
-                    <span><i class="ri-user-add-line"></i></span>
+                    <span><i class="@auth ri-user-line @else ri-user-add-line @endauth"></i></span>
                     <ul class="list-style">
-                        <li><a href="login.html">Sign In</a></li>
-                        <li><a href="register.html">Sign Up</a></li>
+                        @if (Route::has('login'))
+                            @auth
+                                <li><a href="{{route('home')}}">Dashboard</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            @else
+                                <li><a href="{{route('login')}}">Sign In</a></li>
+                                <li><a href="{{route('register')}}">Sign Up</a></li>
+                            @endauth
+                        @endif
                     </ul>
                 </div>
                 <div class="mobile-menu d-lg-none">

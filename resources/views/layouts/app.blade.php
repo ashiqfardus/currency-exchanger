@@ -26,6 +26,7 @@
     <div id="app">
         @include('includes.front-end.preloader')
         @include('includes.front-end.switcher')
+        <div class="page-wrapper">
         @include('includes.front-end.header')
 
 
@@ -33,6 +34,7 @@
 
 
         @include('includes.front-end.footer')
+        </div>
         <a href="javascript:void(0)" class="back-to-top bounce"><i class="ri-arrow-up-s-line"></i></a>
 
 
