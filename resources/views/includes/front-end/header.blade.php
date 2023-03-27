@@ -202,7 +202,14 @@
                                 <ul class="list-style">
                                     @if (Route::has('login'))
                                         @auth
-                                        <li><a href="{{route('home')}}">Dashboard</a></li>
+                                            @php
+                                                $user_type = \Illuminate\Support\Facades\Auth::user()->type;
+                                            @endphp
+                                            @if($user_type == 'admin')
+                                                <li><a href="{{route('admin.index')}}">Dashboard</a></li>
+                                            @else
+                                                <li><a href="{{route('home')}}">Dashboard</a></li>
+                                            @endif
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
@@ -232,7 +239,14 @@
                     <ul class="list-style">
                         @if (Route::has('login'))
                             @auth
-                                <li><a href="{{route('home')}}">Dashboard</a></li>
+                                @php
+                                    $user_type = \Illuminate\Support\Facades\Auth::user()->type;
+                                @endphp
+                                @if($user_type == 'admin')
+                                    <li><a href="{{route('admin.index')}}">Dashboard</a></li>
+                                @else
+                                    <li><a href="{{route('home')}}">Dashboard</a></li>
+                                @endif
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
