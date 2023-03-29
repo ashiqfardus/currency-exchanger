@@ -23,10 +23,16 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+<input type="hidden" id="baseUrl" value="{{url()->current()}}">
+<input type="hidden" id="pathUrl" value="{{url('/')}}">
     <div id="app">
+
         @include('includes.front-end.preloader')
+
         @include('includes.front-end.switcher')
+
         <div class="page-wrapper">
+
         @include('includes.front-end.header')
 
 
@@ -34,9 +40,9 @@
 
 
         @include('includes.front-end.footer')
+
         </div>
         <a href="javascript:void(0)" class="back-to-top bounce"><i class="ri-arrow-up-s-line"></i></a>
-
 
         <script data-cfasync="false" src="{{asset('/')}}front-end/js/email-decode.min.js"></script>
         <script src="{{asset('/')}}front-end/js/jquery.min.js"></script>
@@ -51,6 +57,8 @@
         <script src="{{asset('/')}}front-end/js/jquery.appear.js"></script>
         <script src="{{asset('/')}}front-end/js/tweenmax.min.js"></script>
         <script src="{{asset('/')}}front-end/js/main.js"></script>
+
+        @yield('script')
     </div>
 </body>
 </html>

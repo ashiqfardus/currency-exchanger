@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\FrontendIndexController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -18,9 +19,7 @@ use App\Http\Controllers\CurrencyMerger;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+Route::get('/', [FrontendIndexController::class, 'index'])->name('/');
 
 Auth::routes();
 
