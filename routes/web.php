@@ -24,6 +24,10 @@ Route::get('/', [FrontendIndexController::class, 'index'])->name('/');
 Auth::routes();
 
 
+//index page routes
+Route::get('getReceiveCurrencyDetailsBySendCurrencyId/{id}', [FrontendIndexController::class, 'getReceiveCurrency'])->name('getReceiveCurrency');
+
+
 //User middleware & routes
 Route::middleware(['auth', 'user-access:user','user-verify','user-active'])->group(function(){
     Route::get('/home', [HomeController::class, 'index'])->name('home');

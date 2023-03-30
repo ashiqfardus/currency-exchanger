@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{asset('/')}}front-end/css/responsive.css">
     <link rel="stylesheet" href="{{asset('/')}}front-end/css/dark-theme.css">
     <link rel="icon" type="image/png" href="{{asset('/')}}front-end/img/favicon.png">
+    <link href="{{asset('assets/css/parsley.css')}}" type="text/css" rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -57,8 +58,13 @@
         <script src="{{asset('/')}}front-end/js/jquery.appear.js"></script>
         <script src="{{asset('/')}}front-end/js/tweenmax.min.js"></script>
         <script src="{{asset('/')}}front-end/js/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         @yield('script')
+
+        <script>
+            $('form').parsley();
+        </script>
     </div>
 </body>
 </html>

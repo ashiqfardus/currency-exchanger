@@ -26,26 +26,26 @@
                             @csrf
                             <div class="form-group">
                                 <label for="send_currency">Send</label>
-                                <select name="send_currency" id="send_currency">
+                                <select name="send_currency" id="send_currency" required>
                                     <option value="">Select Currency</option>
                                     @foreach($send_currency as $item)
-                                        <option value="1" data-reserve="{{$item->reserve}}" data-min="{{$item->min}}" data-max="{{$item->max}}">{{$item->name}} - {{$item->currency_type}}</option>
+                                        <option value="{{$item->id}}" data-min="{{$item->min}}" data-max="{{$item->max}}">{{$item->name}} - {{$item->currency_type}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="receive_currency">Receive</label>
-                                <select name="receive_currency" id="receive_currency">
+                                <select name="receive_currency" id="receive_currency" required>
 
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="currency">Send Amount </label>
-                                <input type="number" placeholder="Enter amount" id="send_amount" name="send_amount">
+                                <input type="number" placeholder="Enter amount" id="send_amount" name="send_amount" required>
                             </div>
                             <div class="form-group">
                                 <label for="currency">Receive Amount </label>
-                                <input type="number" id="receive_amount" name="receive_amount" readonly>
+                                <input type="number" id="receive_amount" name="receive_amount" readonly required>
                             </div>
                             <button type="submit" class="btn style1">EXCHANGE NOW</button>
                         </form>
