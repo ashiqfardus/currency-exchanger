@@ -33,7 +33,7 @@ class FrontendIndexController extends Controller
 
         foreach ($data as $item){
             $option .= '
-                <option value="'.$item->receive_id.'" data-send="'.$item->send_unit.'" data-receive="'.$item->receive_unit.'" data-reserve="'.$item->reserve.'">'.$item->name.' - '.$item->currency_type.'</option>
+                <option value="'.$item->receive_id.'" data-send="'.$item->sent_unit.'" data-receive="'.$item->receive_unit.'" data-reserve="'.$item->reserve.'">'.$item->name.' - '.$item->currency_type.'</option>
             ';
         }
         return response()->json(['option'=>$option]);
