@@ -36,9 +36,11 @@
                             <div class="form-group">
                                 <label for="receive_currency">Receive</label>
                                 <select name="receive_currency" id="receive_currency" required>
-
                                 </select>
                             </div>
+                            <input type="hidden" id="send_unit">
+                            <input type="hidden" id="receive_unit">
+                            <input type="hidden" id="reserve_amount">
                             <div class="form-group">
                                 <label for="currency">Send Amount </label>
                                 <input type="number" placeholder="Enter amount" id="send_amount" name="send_amount" required>
@@ -47,7 +49,7 @@
                                 <label for="currency">Receive Amount </label>
                                 <input type="number" id="receive_amount" name="receive_amount" readonly required>
                             </div>
-                            <button type="submit" class="btn style1">EXCHANGE NOW</button>
+                            <button type="submit" id="submit" class="btn style1">EXCHANGE NOW</button>
                         </form>
 
                     </div>
