@@ -22,32 +22,39 @@
                     <div class="currency-converter-wrap">
                         <h5 class="text-center">Start Exchange</h5>
 
-                        <form action="">
+                        <form action="{{route('order.place')}}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="send_currency">Send</label>
                                 <select name="send_currency" id="send_currency" required>
                                     <option value="">Select Currency</option>
                                     @foreach($send_currency as $item)
-                                        <option value="{{$item->id}}" data-min="{{$item->min}}" data-max="{{$item->max}}">{{$item->name}} - {{$item->currency_type}}</option>
+                                        <option value="{{$item->id}}" data-min="{{$item->min}}" data-max="{{$item->max}}" data-currency-type="{{$item->currency_type}}">{{$item->name}} - {{$item->currency_type}}</option>
                                     @endforeach
+
                                 </select>
+                                <input type="hidden" id="send_currency_type" name="send_currency_type">
                             </div>
                             <div class="form-group">
                                 <label for="receive_currency">Receive</label>
                                 <select name="receive_currency" id="receive_currency" required>
                                 </select>
+                                <div id="show_rate" style="color: green; font-weight: bold;">
+
+                                </div>
                             </div>
-                            <input type="hidden" id="send_unit">
-                            <input type="hidden" id="receive_unit">
-                            <input type="hidden" id="reserve_amount">
+                            <input type="hidden" id="send_unit" name="send_unit">
+                            <input type="hidden" id="receive_unit" name="receive_unit">
+                            <input type="hidden" id="reserve_amount" name="reserve_amount">
+                            <input type="hidden" id="receive_currency_type" name="receive_currency_type">
                             <div class="form-group">
                                 <label for="currency">Send Amount </label>
-                                <input type="number" placeholder="Enter amount" id="send_amount" name="send_amount" required>
+                                <input type="number" placeholder="Enter amount" id="send_amount" name="send_amount" required step="0.01">
                             </div>
                             <div class="form-group">
                                 <label for="currency">Receive Amount </label>
-                                <input type="number" id="receive_amount" name="receive_amount" readonly required>
+                                <input type="number" id="receive_amount" name="receive_amount" readonly required step="0.01">
+                                <div id="receive_amount_error" style="color: red;"></div>
                             </div>
                             <button type="submit" id="submit" class="btn style1">EXCHANGE NOW</button>
                         </form>

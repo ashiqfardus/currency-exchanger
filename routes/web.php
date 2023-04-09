@@ -31,6 +31,7 @@ Route::get('getReceiveCurrencyDetailsBySendCurrencyId/{id}', [FrontendIndexContr
 //User middleware & routes
 Route::middleware(['auth', 'user-access:user','user-verify','user-active'])->group(function(){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/place-order', [FrontendIndexController::class, 'placeOrder'])->name('order.place');
 });
 Route::middleware(['auth', 'user-access:user'])->group(function(){
     Route::get('/verification', [HomeController::class, 'verification'])->name('verification');

@@ -2354,10 +2354,10 @@ select {
     line-height: 22px;
     display: inline-block;
     padding: 0 5px;
-    transition: .3s;
+    transition: .3s !important;
     -webkit-transition: .3s;
     position: relative;
-    color: #fff
+    color: #fff !important;
 }
 
 .breadcrumb-title .breadcrumb-menu li a:hover {
@@ -6020,4 +6020,9 @@ article {
 .buy-now-btn:hover {
     color: #fff;
     background-color: #94be5d
+}
+
+.error-form-input{
+    color: #f80804 !important;
+    border: 1px solid #f80431 !important;
 }
