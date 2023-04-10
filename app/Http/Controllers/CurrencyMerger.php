@@ -156,6 +156,8 @@ class CurrencyMerger extends Controller
         $tr = '';
         $dataId = 100;
 
+        $active_status = $mergedData[0]->is_active;
+
         foreach ($mergedData as $row){
             $tr .= '
                 <tr id="raw-row-id'.$dataId.'" class="row-item">
@@ -208,7 +210,8 @@ class CurrencyMerger extends Controller
                 'currency_type_name' => $currency_type,
                 'min'=>$min_amnt,
                 'max' => $max_amnt,
-                'tr' => $tr
+                'tr' => $tr,
+                'active_status' => $active_status
             ]
         );
     }
@@ -223,7 +226,7 @@ class CurrencyMerger extends Controller
             'inc_prod_data_id' => 'required',
             'edit_receive_currency_id' => 'required',
             'edit_sent_amount' => 'required',
-            'edit_receive_amount' => 'required'
+            'edit_receive_amount' => 'required',
         ]);
 
         $sendCurrencyId = $request->edit_currency;
@@ -232,6 +235,7 @@ class CurrencyMerger extends Controller
         $editRcvId = $request->edit_receive_currency_id;
         $editSentAmount = $request->edit_sent_amount;
         $editRcvAmount = $request->edit_receive_amount;
+        $is_active = $request->is_active;
 
         $deleteExistingData = DB::table('currency_merger')->where('send_id',$sendCurrencyId)->delete();
 
@@ -246,7 +250,8 @@ class CurrencyMerger extends Controller
                 'receive_id' => $editRcvId[$i],
                 'sent_unit' => $editSentAmount[$i],
                 'receive_unit' => $editRcvAmount[$i],
-                'created_by' => Auth::user()->id
+                'created_by' => Auth::user()->id,
+                'is_active' =>$is_active
             ];
 
             $insert = DB::table('currency_merger')->insert($data);

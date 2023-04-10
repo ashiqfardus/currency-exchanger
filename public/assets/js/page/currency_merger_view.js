@@ -26,8 +26,26 @@ $(document).ready(function() {
                 $('#edit_min_amount').val(result.min);
                 $('#edit_max_amount').val(result.max);
                 $('#included_prod_tbody').html(result.tr);
+                if(result.active_status === 0){
+                    $('#is_active_input').attr('checked', false);
+                    $('#is_active').val(0);
+                }
+                else{
+                    $('#is_active_input').attr('checked', true);
+                    $('#is_active').val(1);
+                }
             }
         });
+    });
+
+    $('#is_active_input').on('click', function (){
+        var is_checked = $('#is_active_input').is(':checked');
+        if (is_checked){
+            $('#is_active').val(1);
+        }
+        else {
+            $('#is_active').val(0);
+        }
     });
 
     $('#edit_modal').on('hidden.bs.modal', function () {

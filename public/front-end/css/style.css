@@ -678,7 +678,7 @@ select {
 }
 
 .btn:hover {
-    color: #fff
+    color: #fff!important;
 }
 
 .btn:hover:after, .btn:hover:before {
@@ -6025,4 +6025,8 @@ article {
 .error-form-input{
     color: #f80804 !important;
     border: 1px solid #f80431 !important;
+}
+
+.required-color{
+    color: red;
 }

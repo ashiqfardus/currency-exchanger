@@ -17,7 +17,7 @@
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">All <span class="text-700 fw-semi-bold">({{$count}})</span></a></li>
             </ul>
-            <div id="products" data-list='{"valueNames":["send_id","min","max","receive_id","send_unit", "receive_unit"],"page":10,"pagination":true}'>
+            <div id="products" data-list='{"valueNames":["send_id","min","max","receive_id","send_unit", "receive_unit","is_active"],"page":10,"pagination":true}'>
                 <div class="mb-4">
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
@@ -45,7 +45,8 @@
                                 <th class="sort align-middle" scope="col" data-sort="receive_id">Receive Currency</th>
                                 <th class="sort align-middle" scope="col" data-sort="send_unit">Send Amount</th>
                                 <th class="sort align-middle" scope="col" data-sort="receive_unit">Receive Amount</th>
-                                <th class="sort align-middle" scope="col" data-sort="receive_unit">Action</th>
+                                <th class="sort align-middle" scope="col" data-sort="is_active">Active Status</th>
+                                <th class="sort align-middle" scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody class="list" id="customers-table-body">
@@ -66,6 +67,7 @@
                                         <td class="table_padding" >{{$row[0]->rcv_currency_name}}</td>
                                         <td class="table_padding" >{{$row[0]->sent_unit}} {{$row[0]->send_currency_type}}</td>
                                         <td class="table_padding" >{{$row[0]->receive_unit}} {{$row[0]->rcv_currency_type}}</td>
+                                        <td rowspan="{{$c}}">{{($row[0]->is_active == 0 ? "Inactive" : "Active")}}</td>
                                         <td rowspan="{{$c}}">
                                             <a class="btn btn-phoenix-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit" data-id='{{$row[0]->send_id}}' id="btn_edit">
                                                 <i class="fas fa-pencil"></i>
@@ -228,6 +230,13 @@
                                         </tfoot>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <label for="is_active_input"></label>
+                                <input type="checkbox" class="form-check-input" name="is_active_input" id="is_active_input"><span> Is active</span>
+                                <input type="hidden" name="is_active" id="is_active" value="0">
                             </div>
                         </div>
 

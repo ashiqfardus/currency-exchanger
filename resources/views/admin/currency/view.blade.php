@@ -11,7 +11,7 @@
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">All <span class="text-700 fw-semi-bold">({{$count}})</span></a></li>
             </ul>
-            <div id="products" data-list='{"valueNames":["name","currency_type","reserve","image","is_active"],"page":10,"pagination":true}'>
+            <div id="products" data-list='{"valueNames":["name","currency_type","reserve","image","account_details","instruction","is_active"],"page":10,"pagination":true}'>
                 <div class="mb-4">
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
@@ -37,6 +37,8 @@
                                 <th class="sort align-middle" scope="col" data-sort="currency_type">Type</th>
                                 <th class="sort align-middle" scope="col" data-sort="reserve">Reserve</th>
                                 <th class="sort align-middle" scope="col" data-sort="image">Image</th>
+                                <th class="sort align-middle" scope="col" data-sort="account_details">Image</th>
+                                <th class="sort align-middle" scope="col" data-sort="instruction">Image</th>
                                 <th class="sort align-middle" scope="col" data-sort="is_active">Active Status</th>
                                 <th class="sort align-middle text-center" scope="col" data-sort="action">Action</th>
                             </tr>
@@ -57,6 +59,12 @@
 
                                         <td class="image align-middle white-space-nowrap fw-semi-bold text-1000">
                                             <img src="{{asset('assets/images/currency/'.$row->image)}}" alt="{{$row->image}}" width="40px">
+                                        </td>
+                                        <td class="name align-middle white-space-nowrap pe-5">
+                                            <p class="mb-0 text-1100 fw-bold">{{$row->account_details}}</p>
+                                        </td>
+                                        <td class="name align-middle white-space-nowrap pe-5">
+                                            <p class="mb-0 text-1100 fw-bold">{{$row->instruction}}</p>
                                         </td>
                                         <td class="is_active align-middle white-space-nowrap fw-bold ps-3 text-1100">
                                             <a href="{{route('currency.activate',['id'=>$row->id])}}">

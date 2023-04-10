@@ -32,7 +32,9 @@ class CurrencyController extends Controller
             'name'=>'required',
             'image'=>'required|mimes:jpeg,png,jpg,gif',
             'reserve'=>'required|numeric',
-            'currency_type'=>'required'
+            'currency_type'=>'required',
+            'account_details' => 'required',
+            'instruction' => 'required'
         ]);
 
         if (request()->hasFile('image')){
@@ -48,7 +50,9 @@ class CurrencyController extends Controller
             'image' => $image,
             'currency_type'=>$request->currency_type,
             'reserve'=>$request->reserve,
-            'is_active'=>$request->is_active
+            'is_active'=>$request->is_active,
+            'account_details' => $request->account_details,
+            'instruction' => $request->instruction,
         ];
         $result = DB::table('currency_details')->insert($data);
         if ($result){
@@ -76,7 +80,9 @@ class CurrencyController extends Controller
         $request->validate([
             'name'=>'required',
             'reserve'=>'required|numeric',
-            'currency_type'=>'required'
+            'currency_type'=>'required',
+            'account_details' => 'required',
+            'instruction' => 'required'
         ]);
 
         $currency_details = DB::table('currency_details')->where('id',$id)->get();
@@ -98,7 +104,9 @@ class CurrencyController extends Controller
             'image' => $image,
             'currency_type'=>$request->currency_type,
             'reserve'=>$request->reserve,
-            'is_active'=>$request->is_active
+            'is_active'=>$request->is_active,
+            'account_details' => $request->account_details,
+            'instruction' => $request->instruction,
         ];
 
         $result = DB::table('currency_details')->where('id',$id)->update($data);

@@ -48,8 +48,28 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12">
+                                    <label for="account_details" class="form-label">Account Details</label>
+                                    <input type="text" class="form-control @error('account_details') is-invalid @enderror" id="account_details" placeholder="Account details" name="account_details" value="{{old('account_details')}}" data-parsley-required="true">
+                                    @error('account_details')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                    <label class="form-label" for="instruction">Instruction</label>
+                                    <textarea name="instruction" id="instruction" cols="30" rows="7" class="form-control @error('instruction') is-invalid @enderror" required>{{old('instruction')}}</textarea>
+                                    @error('instruction')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label class="form-label" for="image">Image</label>
-                                    <input type="file" name="image" id="input-file-now" class="dropify form-control" data-height="150" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg gif" data-parsley-required="true"/>
+                                    <input type="file" name="image" id="input-file-now" class="dropify form-control" data-height="140" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg gif" data-parsley-required="true"/>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12 mt-5">
                                     <label for="is_active_input"></label>

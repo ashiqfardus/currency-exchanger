@@ -13,6 +13,7 @@ class FrontendIndexController extends Controller
             ->leftJoin('currency_merger', 'currency_details.id', '=', 'currency_merger.send_id')
             ->select('currency_details.*', 'currency_types.name AS currency_type', 'currency_merger.send_id', 'currency_merger.min', 'currency_merger.max')
             ->where('currency_merger.send_id', '!=', '')
+            ->where('currency_merger.is_active', '=',1)
             ->groupBy('currency_merger.send_id')
             ->get();
 
@@ -27,6 +28,7 @@ class FrontendIndexController extends Controller
             ->leftJoin('currency_types', 'currency_details.currency_type', '=', 'currency_types.id')
             ->select('currency_merger.*','currency_details.name', 'currency_details.reserve', 'currency_types.name AS currency_type')
             ->where('currency_merger.send_id','=',$id)
+            ->where('currency_merger.is_active', '=',1)
             ->get();
 
         $option = '<option value="">Select Receive Currency</option>';
@@ -42,6 +44,35 @@ class FrontendIndexController extends Controller
 
     //place order first step form data
     public function placeOrder(Request $request){
-        return view('order')->with('formData', $request);
+
+//        return $request;
+        $data =[];
+        $send_currency = DB::table('currency_details')
+                                ->leftJoin('currency_types', 'currency_details.currency_type', '=', 'currency_types.id')
+                                ->select('currency_details.*', 'currency_types.name as currency_type_name')
+                                ->where('currency_details.id', $request->send_currency)->get();
+
+
+        $receive_currency = DB::table('currency_details')
+                            ->leftJoin('currency_types', 'currency_details.currency_type', '=', 'currency_types.id')
+                            ->select('currency_details.*', 'currency_types.name as currency_type_name')
+                            ->where('currency_details.id', $request->receive_currency)->get();
+
+        $data = [
+          'send_id' => $send_currency[0]->id,
+          'send_currency_name' => $send_currency[0]->name,
+          'send_currency_type' => $send_currency[0]->currency_type_name,
+          'send_currency_image' => $send_currency[0]->image,
+          'receive_id' => $receive_currency[0]->id,
+          'receive_currency_name' => $receive_currency[0]->name,
+          'receive_currency_type' => $receive_currency[0]->currency_type_name,
+            'receive_currency_image' => $receive_currency[0]->image,
+            'send_unit' => $request->send_unit,
+            'receive_unit' => $request->receive_unit,
+            'send_amount' => $request->send_amount,
+            'receive_amount' => $request->receive_amount,
+        ];
+
+        return view('order')->with('formData', $data);
     }
 }

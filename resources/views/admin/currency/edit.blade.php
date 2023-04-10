@@ -49,19 +49,39 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12">
+                                    <label for="account_details" class="form-label">Account Details</label>
+                                    <input type="text" class="form-control @error('account_details') is-invalid @enderror" id="account_details" placeholder="Account details" name="account_details" value="{{$currency_details->account_details}}" data-parsley-required="true">
+                                    @error('account_details')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                    <label class="form-label" for="instruction">Instruction</label>
+                                    <textarea name="instruction" id="instruction" cols="30" rows="7" class="form-control @error('instruction') is-invalid @enderror" required>{{$currency_details->instruction}}</textarea>
+                                    @error('instruction')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label class="form-label" for="image">Image</label>
                                     <input type="file" name="image" id="input-file-now" class="dropify form-control" data-height="150" data-max-file-size="3M" data-allowed-file-extensions="jpg png jpeg gif"/>
-
-                                </div>
-                                <div class="col-md-6 offset-md-6 mt-2">
-                                    <label class="form-label" for="old_image">Old Image</label>
-                                    <img id="old_image" class="form-control" src="{{asset('assets/images/currency/'.$currency_details->image)}}" alt="{{$currency_details->image}}" style="width: 100px !important;">
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12 mt-5">
                                     <label for="is_active_input"></label>
-                                    <input type="checkbox" class="form-check-input" name="is_active_input" id="is_active_input" checked><span> Is active</span>
-                                    <input type="hidden" name="is_active" id="is_active" value="1">
+                                    <input type="checkbox" class="form-check-input" name="is_active_input" id="is_active_input" {{$currency_details->is_active ==1 ? "checked":""}}><span> Is active</span>
+                                    <input type="hidden" name="is_active" id="is_active" value="{{$currency_details->is_active}}">
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="old_image">Old Image</label>
+                                    <img id="old_image" class="form-control" src="{{asset('assets/images/currency/'.$currency_details->image)}}" alt="{{$currency_details->image}}" style="width: 100px !important;">
+                                </div>
+
                             </div>
 
 
