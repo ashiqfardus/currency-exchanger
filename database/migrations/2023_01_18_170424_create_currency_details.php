@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('currency_type');
+            $table->string('account_details');
+            $table->text('instruction');
             $table->decimal('reserve',10,2)->default(0);
             $table->boolean('is_active')->default(1);
             $table->timestamps();
