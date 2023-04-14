@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3a1dab2a04f9afabae435472efbc8c1",
+    "content-hash": "b080b786ddb0e4abd6fb132303ad0f63",
     "packages": [
         {
             "name": "brian2694/laravel-toastr",
@@ -5313,6 +5313,69 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.6"
             },
             "time": "2023-01-03T09:29:04+00:00"
+        },
+        {
+            "name": "tjgazel/laravel-accept-cookies",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tjgazel/laravel-accept-cookies.git",
+                "reference": "fc9a71f41ab3a22457e59dfd546cb818c8b8a1a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tjgazel/laravel-accept-cookies/zipball/fc9a71f41ab3a22457e59dfd546cb818c8b8a1a3",
+                "reference": "fc9a71f41ab3a22457e59dfd546cb818c8b8a1a3",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.5"
+            },
+            "require-dev": {
+                "illuminate/contracts": "^5.5",
+                "illuminate/http": "^5.5",
+                "illuminate/routing": "^5.5",
+                "illuminate/session": "^5.5.0",
+                "illuminate/support": "^5.5"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TJGazel\\Laravel\\AcceptCookies\\AcceptCookiesProvider"
+                    ],
+                    "aliases": {
+                        "AcceptCookies": "TJGazel\\Laravel\\AcceptCookies\\Facades\\AcceptCookies"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TJGazel\\Laravel\\AcceptCookies\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Talles Gazel",
+                    "email": "tjgazel@gmail.com"
+                }
+            ],
+            "description": "Pop-up cookie acceptance terms for Laravel 5.5+",
+            "homepage": "https://github.com/tjgazel/laravel-accept-cookies",
+            "keywords": [
+                "cookies",
+                "laravel",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/tjgazel/laravel-accept-cookies/issues",
+                "source": "https://github.com/tjgazel/laravel-accept-cookies/tree/v1.0.1"
+            },
+            "time": "2021-02-05T12:46:34+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

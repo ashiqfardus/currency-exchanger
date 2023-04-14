@@ -19,6 +19,7 @@ use App\Http\Controllers\CurrencyMerger;
 |
 */
 
+AcceptCookies::routes();
 Route::get('/', [FrontendIndexController::class, 'index'])->name('/');
 
 Auth::routes();

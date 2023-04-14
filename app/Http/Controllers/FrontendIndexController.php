@@ -71,6 +71,8 @@ class FrontendIndexController extends Controller
             'receive_unit' => $request->receive_unit,
             'send_amount' => $request->send_amount,
             'receive_amount' => $request->receive_amount,
+            'account_details' => $send_currency[0]->account_details,
+            'instruction' => $send_currency[0]->instruction,
         ];
 
         return view('order')->with('formData', $data);

@@ -41,6 +41,7 @@
 
 
         @include('includes.front-end.footer')
+        @include('accept-cookies::template')
 
         </div>
         <a href="javascript:void(0)" class="back-to-top bounce"><i class="ri-arrow-up-s-line"></i></a>
@@ -60,6 +61,7 @@
         <script src="{{asset('/')}}front-end/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+        @stack('js')
         @yield('script')
 
         <script>
