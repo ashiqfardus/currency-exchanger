@@ -45,7 +45,7 @@
                     <div class="convert-tabcontent">
                         <div class="row">
                             <div class="col-md-8 mt-3" style="border-right: 1px solid #00A79D;">
-                                <form action="#" class="convert-form" method="post" enctype="multipart/form-data">
+                                <form action="{{route('order.store')}}" class="convert-form" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="send_id" value="{{$formData['send_id']}}">
                                     <input type="hidden" name="receive_id" value="{{$formData['receive_id']}}">
@@ -60,7 +60,8 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="send_amount">Amount</label>
-                                                <input type="text" class="form-control disabled" name="send_amount" id="send_amount" value="{{$formData['send_amount']}} {{$formData['send_currency_type']}}" readonly required>
+                                                <input type="text" class="form-control disabled" name="send_amount_show" id="send_amount_show" value="{{$formData['send_amount']}} {{$formData['send_currency_type']}}" readonly required>
+                                                <input type="hidden" name="send_amount" id="send_amount" value="{{$formData['send_amount']}}" readonly required>
                                             </div>
                                         </div>
                                         <div class="row align-items-center mb-30">
@@ -79,7 +80,8 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="receive_amount">Amount</label>
-                                                <input type="text" class="form-control disabled" name="receive_amount" id="receive_amount" value="{{$formData['receive_amount']}} {{$formData['receive_currency_type']}}" readonly required>
+                                                <input type="text" class="form-control disabled" name="receive_amount_show" id="receive_amount_show" value="{{$formData['receive_amount']}} {{$formData['receive_currency_type']}}" readonly required>
+                                                <input type="hidden" name="receive_amount" id="receive_amount" value="{{$formData['receive_amount']}}" readonly required>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
@@ -142,7 +144,7 @@
                                         <tbody>
                                             <tr>
                                                 <td><i class="ri-arrow-up-line"></i> Amount Send</td>
-                                                <td>{{$formData['send_amount']}} {{$formData['send_currency_type']}}</td>
+                                                <td>{{number_format($formData['send_amount'],2, '.', '')}} {{$formData['send_currency_type']}}</td>
                                             </tr>
                                             <tr>
                                                 <td><i class="ri-arrow-down-line"></i> Amount Receive</td>
@@ -160,7 +162,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Total for Pay</th>
-                                                <th>{{$formData['send_amount']}} {{$formData['send_currency_type']}}</th>
+                                                <th>{{number_format($formData['send_amount'],2, '.', '')}} {{$formData['send_currency_type']}}</th>
                                             </tr>
                                         </tfoot>
                                     </table>

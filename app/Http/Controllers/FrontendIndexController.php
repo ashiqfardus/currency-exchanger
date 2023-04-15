@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminOrderMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendIndexController extends Controller
 {
@@ -77,4 +80,88 @@ class FrontendIndexController extends Controller
 
         return view('order')->with('formData', $data);
     }
+
+    public function storeOrder(Request $request){
+//        return $request;
+        $request->validate([
+           'send_id' => 'required',
+           'receive_id' => 'required',
+           'send_unit' => 'required',
+           'receive_unit' => 'required',
+           'send_amount' => 'required',
+           'receive_amount' => 'required',
+           'buyer_name' => 'required',
+           'buyer_email' => 'required',
+           'account_details' => 'required',
+           'payment_details' => 'required',
+           'payment_proof' => 'required|image',
+        ]);
+
+        if (request()->hasFile('payment_proof')){
+            $image = time().request()->file('payment_proof')->getClientOriginalName();
+            request()->file('payment_proof')->move('assets/images/payment_proof',$image);
+        }
+        else{
+            $image ='';
+        }
+
+        //generate order no
+        $row = DB::select("SELECT substring_index(MAX(order_no),'-',-1) as ext FROM orders ORDER BY id DESC LIMIT 1");
+        if ($row[0]->ext == ''){
+            $ext='1';
+        }
+        else{
+            $ext =$row[0]->ext+1;
+        }
+
+        $sl_no ='';
+        if ($ext<10){
+            $sl_no = '00000'.$ext;
+        }
+        elseif ($ext<100){
+            $sl_no = '0000'.$ext;
+        }
+        elseif($ext<1000){
+            $sl_no = '000'.$ext;
+        }
+        elseif($ext<10000){
+            $sl_no = '00'.$ext;
+        }
+        elseif($ext<100000){
+            $sl_no = '0'.$ext;
+        }
+        else{
+            $sl_no = $ext;
+        }
+
+        $order_no = 'CE-'.date('y').'-'.$sl_no;
+
+
+
+        $data = [
+            'user_id' => Auth::id(),
+            'order_no' => $order_no,
+            'send_id' => $request->send_id,
+            'receive_id' => $request->receive_id,
+            'send_unit' => $request->send_unit,
+            'receive_unit' => $request->receive_unit,
+            'send_amount' => $request->send_amount,
+            'receive_amount' => $request->receive_amount,
+            'buyer_name' => $request->buyer_name,
+            'buyer_email' => $request->buyer_email,
+            'account_details' => $request->account_details,
+            'payment_details' => $request->payment_details,
+            'payment_proof' => $image
+        ];
+
+        $result = DB::table('orders')->insert($data);
+        Mail::to('ashiqfardus@hotmail.com')->send(new AdminOrderMail($data));
+        if ($result){
+            return view('order-success')->with(['success'=>'Your order has been placed.', 'order_no' => $order_no]);
+        }
+        else{
+            return redirect()->back()->with('error','Something went wrong');
+        }
+    }
+
 }
